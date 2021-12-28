@@ -1,73 +1,77 @@
-import React      from "react";
-import Grid       from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import Grid           from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
+import MainGridItem from '../../components/main/MainGridItem';
+import GridItem from '../../components/main/GridItem';
+import Mando from '../../static/img/madal.jpg';
+
 const useStyles = makeStyles(theme => ({
-    mainGridItem: {
-        backgroundColor: 'blue'
-    },
-    secondRowFirstItem: {
-        backgroundColor: 'green'
-    },
-    secondRowSecondItem: {
-        backgroundColor: 'orange'
-    },
-    thirdRowFirstItem: {
-      backgroundColor: 'red'
-    },
-    thirdRowSecondItem: {
-      backgroundColor: 'pink'
-    },
-    thirdRowThirdItem: {
-      backgroundColor: 'yellow'
-    }
-    
+  
+  mainGridItem: {
+    backgroundColor: 'blue'
+  },
+  secondRowFirstItem: {
+    backgroundColor: 'green'
+  },
+  secondRowSecondItem: {
+    backgroundColor: 'orange'
+  },
+  thirdRow: {
+    backgroundColor: 'pink'
+  }
+  
 }));
 
-
 export default function GridLayout() {
+    
+  return (
+    <Grid container spacing={3}>
+    
+      <Grid item lg={12} sm={12} xs={12}>
+        <MainGridItem />
+      </Grid>
 
-    const classes = useStyles();
-
-    return(
-        <Grid container spacing={3}>
-
-            <Grid item lg={12} sm={12} xs={12}>
-                <Typography className={classes.mainGridItem}>
-                 Main grid Item
-                </Typography>
-            </Grid>
-            
-            <Grid item sm={6} xs={12}>
-                <Typography className={classes.secondRowFirstItem}>
-                 Second Row, First Item
-                </Typography>
-            </Grid>
-
-            <Grid item sm={6} xs={12}>
-                <Typography className={classes.secondRowSecondItem}>
-                 Second Row Second Item
-                </Typography>
-            </Grid>
-
-            <Grid item sm={4} xs={12}>
-        <Typography className={classes.thirdRowFirstItem}>
-          Third Row first Item
-        </Typography>
+      <Grid item lg={6} md={12} sm={12} xs={12}>
+        <GridItem 
+          title="Mandalorian Brotherhood"
+          image={Mando}
+          description="Mandalorian brotherhoods."
+        />
       </Grid>
     
-      <Grid item sm={4} xs={12}>
-        <Typography className={classes.thirdRowSecondItem}>
-          Third Row Second Item
-        </Typography>
+      <Grid item lg={6} md={12} sm={12} xs={12}>
+        <GridItem  
+          title="Hired" 
+          image=""
+          description=""
+        />
       </Grid>
-
-      <Grid item sm={4} xs={12}>
-        <Typography className={classes.thirdRowThirdItem}>
-          Third Row Third Item
-        </Typography>
+    
+      <Grid item lg={4} md={12} sm={12} xs={12}>
+        <GridItem 
+          title="3D  " 
+          image=""
+          description=""
+        />
       </Grid>
-        </Grid> 
-    )
+    
+      <Grid item lg={4} md={12} sm={12} xs={12}>
+        <GridItem 
+          title="Side Hustles" 
+          image=""
+          description=""
+      />
+      </Grid>
+    
+      <Grid item lg={4} md={12} sm={12} xs={12}>
+        <GridItem  
+          title="Game" 
+          image=""
+          description=""
+        />
+      </Grid>
+    
+    </Grid>
+  );
 }
