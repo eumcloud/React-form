@@ -2,7 +2,7 @@
 import React         from 'react';
 import CssBaseline   from '@material-ui/core/CssBaseline';
 import NavigationBar from './components/main/NavigationBar';
-import GridLayout    from './container/main/GridLayout';
+import GridLayout    from './containers/main/GridLayout';
 import Container     from '@material-ui/core/Container';
 import Typography    from '@material-ui/core/Typography';
 
