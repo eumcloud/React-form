@@ -1,13 +1,23 @@
-import './App.css';
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import NavigationBar from './components/NavigationBar';
+
+import React         from 'react';
+import CssBaseline   from '@material-ui/core/CssBaseline';
+import NavigationBar from './components/main/NavigationBar';
+import GridLayout    from './container/main/GridLayout';
+import Container     from '@material-ui/core/Container';
+import Typography    from '@material-ui/core/Typography';
+
 
 function App() {
   return (
      <div className="App">
        <CssBaseline />
        <NavigationBar />
+
+          <Container>
+            <main>
+              <GridLayout />
+            </main>
+          </Container>
     </div>
   );
 }
