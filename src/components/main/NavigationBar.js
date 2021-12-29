@@ -117,7 +117,7 @@ export default function NavigationBar() {
     return (
 
       <Box>
-      {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
+      {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
   
         <MenuItem> 
 
@@ -125,7 +125,12 @@ export default function NavigationBar() {
 
         </MenuItem>
 
-      ))}
+      ))} */}
+        <MenuItem to={"/"}>Home</MenuItem>
+        <MenuItem to={"/product"}>product</MenuItem>
+        <MenuItem to={"/board"}>board</MenuItem>
+        <MenuItem to={"/mypage"}>mypage</MenuItem>
+        <MenuItem >sign up</MenuItem>
       </Box>
          
      
@@ -150,7 +155,7 @@ export default function NavigationBar() {
     
         <Box className={classes.menuBox}>
           
-          {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
+          {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
   
             <Link
               component='button'
@@ -160,7 +165,12 @@ export default function NavigationBar() {
               {menuOption.toUpperCase()}
             </Link>
     
-          ))}
+          ))} */}
+            <MenuItem to={"/"}>Home</MenuItem>
+            <MenuItem to={"/product"}>product</MenuItem>
+            <MenuItem to={"/board"}>board</MenuItem>
+            <MenuItem to={"/mypage"}>mypage</MenuItem>
+            <MenuItem >sign up</MenuItem>
     
         </Box>
     
