@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-export default function Pagecount() {
+function PageCount({pagenum}) {
     return (
-        <div>
-            1 2 3 4 5 6
-        </div>
+        <div>1 2 3 4 5 6</div>
     )
 }
+
+export default React.memo(PageCount);
