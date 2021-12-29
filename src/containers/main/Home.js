@@ -1,15 +1,16 @@
 import React from 'react'
-import TemplateBlock from "../../compontents/Template";
+import TemplateBlock from "../../components/Template";
 import GridLayouts from "./GridLayout";
 import Navi from "../../components/main/NavigationBar";
 import Footer from "../../components/main/Footer";
+
 
 const Home = ()=>{
     return(
         <div>
             <TemplateBlock>
                 <Navi />
-                <GridLayouts />
+                  <GridLayouts />
                 <Footer />
             </TemplateBlock>
         </div>

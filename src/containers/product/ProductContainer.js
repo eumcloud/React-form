@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function board() {
+export default function ProductContainer() {
     return (
         <div>
             

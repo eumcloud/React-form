@@ -117,20 +117,29 @@ export default function NavigationBar() {
     return (
 
       <Box>
-      {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
+        {['Home', 'product', 'board', 'mypage','sign up'].map((menuOption) => (
+          
+          <MenuItem> 
   
-        <MenuItem> 
+            {menuOption}
+  
+          </MenuItem>
+  
+        ))}
+          {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
+      
+            <MenuItem> 
 
-          {menuOption}
+              {menuOption}
 
-        </MenuItem>
+            </MenuItem>
 
-      ))} */}
-        <MenuItem to={"/"}>Home</MenuItem>
+          ))} */}
+        {/* <MenuItem to={"/"}>Home</MenuItem>
         <MenuItem to={"/product"}>product</MenuItem>
         <MenuItem to={"/board"}>board</MenuItem>
         <MenuItem to={"/mypage"}>mypage</MenuItem>
-        <MenuItem >sign up</MenuItem>
+        <MenuItem >sign up</MenuItem> */}
       </Box>
          
      
@@ -139,6 +148,10 @@ export default function NavigationBar() {
 
   
   const displayLargeMenu = () => {
+    
+    const Links = (props)=>{
+        if("home"=== props){ }
+    };
     return(
     <>
     <Toolbar className={classes.toolbar}>
@@ -155,22 +168,37 @@ export default function NavigationBar() {
     
         <Box className={classes.menuBox}>
           
+            
+
+          {['home', 'products', 'board', 'mypage', 'sign up'].map((menuOption) => (
+  
+            <Link
+              component='button'
+              variant='body1'
+              className={classes.menuOption}
+              onClick={Links}
+            >
+              {menuOption.toUpperCase()}
+            </Link>
+    
+          ))}
           {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
   
             <Link
               component='button'
               variant='body1'
               className={classes.menuOption}
+              onClick={Links}
             >
               {menuOption.toUpperCase()}
             </Link>
     
           ))} */}
-            <MenuItem to={"/"}>Home</MenuItem>
+            {/* <MenuItem to={"/"}>Home</MenuItem>
             <MenuItem to={"/product"}>product</MenuItem>
             <MenuItem to={"/board"}>board</MenuItem>
             <MenuItem to={"/mypage"}>mypage</MenuItem>
-            <MenuItem >sign up</MenuItem>
+            <MenuItem >sign up</MenuItem> */}
     
         </Box>
     
