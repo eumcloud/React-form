@@ -1,18 +1,18 @@
 import React from 'react';
 import Grid           from '@material-ui/core/Grid';
 
-import DiscoverGridItem from '../../components/main/DiscoverGridItem';
+import GalleryGridItem from '../../components/main/GalleryGridItem';
 import GridItem from '../../components/main/GridItem';
 import Mando from '../../static/img/madal.jpg';
 
 
-export default function Discover() {
+export default function Gallery() {
     
   return (
     <Grid container spacing={3}>
     
       <Grid item lg={12} sm={12} xs={12}>
-        <DiscoverGridItem />
+        <GalleryGridItem />
       </Grid>
 
       <Grid item lg={6} md={12} sm={12} xs={12}>
