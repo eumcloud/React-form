@@ -4,12 +4,14 @@ import {
   Toolbar,
   Typography,
   Box,
-  Link,
   AppBar,
   IconButton,
   MenuItem,
-  Drawer
+  Drawer,
+  Tabs,
+  Tab
 } from '@material-ui/core'; 
+import {Link} from 'react-router-dom';
 
 import MenuIcon   from '@material-ui/icons/Menu';
 
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'row'
     }
   },
-  menuOption: {
+  title: {
     padding: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
       paddingLeft: theme.spacing(10),
@@ -47,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   menuIcon: {
+    color: 'black'
+  },
+  tabsContainer: {
     color: 'black'
   }
   
@@ -138,26 +143,35 @@ export default function NavigationBar() {
  
   
   const menuHandler = (e) => {
-      
+     
         switch(e.target.innerHTML) {
           case "ROADMAP":
-            return setRoutesTarget('/')
-            break;
+            return setRoutesTarget('/');
+              break;
           case "DISCOVER":
-            return setRoutesTarget('/page2')
-            break;
+            return setRoutesTarget('/page2');
+              break;
           case "GALLERY":
-            return console.log("gallery access")
-            break;
+            return console.log("gallery access");
+              break;
           case "SIGN UP":
-            return console.log("sign up access")
-            break;        
+            return console.log("sign up access");
+              break;      
+          default :
+              break;  
         }
  
     console.log("error");
   }
 
   
+  const headLink = [ 
+    {title:'roadmap' , path: '/' }, 
+    {title:'discover' , path: '/discover' },
+    {title:'gallery' , path: '/gallery' },
+    {title:'login' , path: '/login' }
+  ];
+
   const displayLargeMenu = () => {
     
     return(
@@ -173,23 +187,33 @@ export default function NavigationBar() {
           Final fighters.
     
         </Typography>
-    
+        
         <Box className={classes.menuBox}>
           
-          {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
+            <Tabs className={classes.tabsContainer}>
+              <Tab label="Roadmap" component={Link} to={"/"} />
+              <Tab label="Discover"component={Link} to={"/discover"} />
+              <Tab label="Gallery" component={Link} to={"/gallery"} />
+              <Tab label="Signup" />
+            </Tabs>
+
+
+
+          {/* {headLink.map(({title, path}) => (
   
-            <Link
-              to={classes.path}
-              component='button'
+            <Ta
+              href={path}
+              component='tab'
               variant='body1'
-              className={classes.menuOption}
-              onClick={(e)=>{menuHandler(e)}}
+              className={classes.title}
+              onClick={menuHandler}
             >
-              {menuOption.toUpperCase()}
-            </Link>
+              {title.toUpperCase()}
+            </Ta>
+            
     
           ))}
-    
+     */}
         </Box>
     
       </Toolbar>

@@ -4,17 +4,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-
 import reportWebVitals from './reportWebVitals';
-import Home from './containers/main/Home';
-// import Board from "./containers/Board";
-// import Product from "./containers/Product";
-import Mypage from "./containers/mypage/MypageContainer";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-    
+    <App />  
   </React.StrictMode>,
   document.getElementById('root')
 );

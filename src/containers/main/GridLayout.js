@@ -1,27 +1,11 @@
 import React from 'react';
 import Grid           from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+
 
 import MainGridItem from '../../components/main/MainGridItem';
 import GridItem from '../../components/main/GridItem';
 import Mando from '../../static/img/madal.jpg';
 
-const useStyles = makeStyles(theme => ({
-  
-  mainGridItem: {
-    backgroundColor: 'blue'
-  },
-  secondRowFirstItem: {
-    backgroundColor: 'green'
-  },
-  secondRowSecondItem: {
-    backgroundColor: 'orange'
-  },
-  thirdRow: {
-    backgroundColor: 'pink'
-  }
-  
-}));
 
 export default function GridLayout() {
     
