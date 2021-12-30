@@ -66,8 +66,8 @@ export default function NavigationBar() {
     const setResponsiveness = () => {
       
       return window.innerWidth < 960
-        ? setState((prevState) => ({ ...prevState, toggleMenu: true }))
-        : setState((prevState) => ({ ...prevState, toggleMenu: false}));
+        ? setState((prevState) => ({ ...prevState, toggleMenu: true  }))
+        : setState((prevState) => ({ ...prevState, toggleMenu: false }));
       
     };
     
@@ -81,8 +81,8 @@ export default function NavigationBar() {
   
   const displayToggleMenu = () => {
     
-    const handleToggleMenuOpen  = () => setState((prevState) => ({ ...prevState,  toggleMenuOpen: true })); 
-    const handleToggleMenuClose = () => setState((prevState) => ({...prevState, toggleMenuOpen: false})) 
+    const handleToggleMenuOpen  = () => setState((prevState) => ({ ...prevState,  toggleMenuOpen: true  })); 
+    const handleToggleMenuClose = () => setState((prevState) => ({ ...prevState,  toggleMenuOpen: false }));
     
       return(
         <Toolbar>
@@ -117,41 +117,49 @@ export default function NavigationBar() {
     return (
 
       <Box>
-        {['Home', 'product', 'board', 'mypage','sign up'].map((menuOption) => (
-          
-          <MenuItem> 
+      {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
   
-            {menuOption}
-  
-          </MenuItem>
-  
-        ))}
-          {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
-      
-            <MenuItem> 
+        <MenuItem> 
 
-              {menuOption}
+          {menuOption}
 
-            </MenuItem>
+        </MenuItem>
 
-          ))} */}
-        {/* <MenuItem to={"/"}>Home</MenuItem>
-        <MenuItem to={"/product"}>product</MenuItem>
-        <MenuItem to={"/board"}>board</MenuItem>
-        <MenuItem to={"/mypage"}>mypage</MenuItem>
-        <MenuItem >sign up</MenuItem> */}
+      ))}
       </Box>
          
      
     )
   }
 
+  const [routesTarget, setRoutesTarget] = useState({
+  });
+
+ 
+  
+  const menuHandler = (e) => {
+      
+        switch(e.target.innerHTML) {
+          case "ROADMAP":
+            return setRoutesTarget('/')
+            break;
+          case "DISCOVER":
+            return setRoutesTarget('/page2')
+            break;
+          case "GALLERY":
+            return console.log("gallery access")
+            break;
+          case "SIGN UP":
+            return console.log("sign up access")
+            break;        
+        }
+ 
+    console.log("error");
+  }
+
   
   const displayLargeMenu = () => {
     
-    const Links = (props)=>{
-        if("home"=== props){ }
-    };
     return(
     <>
     <Toolbar className={classes.toolbar}>
@@ -168,37 +176,19 @@ export default function NavigationBar() {
     
         <Box className={classes.menuBox}>
           
-            
-
-          {['home', 'products', 'board', 'mypage', 'sign up'].map((menuOption) => (
+          {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
   
             <Link
+              to={classes.path}
               component='button'
               variant='body1'
               className={classes.menuOption}
-              onClick={Links}
+              onClick={(e)=>{menuHandler(e)}}
             >
               {menuOption.toUpperCase()}
             </Link>
     
           ))}
-          {/* {['roadmap', 'discover', 'gallery', 'sign up'].map((menuOption) => (
-  
-            <Link
-              component='button'
-              variant='body1'
-              className={classes.menuOption}
-              onClick={Links}
-            >
-              {menuOption.toUpperCase()}
-            </Link>
-    
-          ))} */}
-            {/* <MenuItem to={"/"}>Home</MenuItem>
-            <MenuItem to={"/product"}>product</MenuItem>
-            <MenuItem to={"/board"}>board</MenuItem>
-            <MenuItem to={"/mypage"}>mypage</MenuItem>
-            <MenuItem >sign up</MenuItem> */}
     
         </Box>
     
