@@ -137,40 +137,7 @@ export default function NavigationBar() {
     )
   }
 
-  const [routesTarget, setRoutesTarget] = useState({
-  });
-
- 
   
-  const menuHandler = (e) => {
-     
-        switch(e.target.innerHTML) {
-          case "ROADMAP":
-            return setRoutesTarget('/');
-              break;
-          case "DISCOVER":
-            return setRoutesTarget('/page2');
-              break;
-          case "GALLERY":
-            return console.log("gallery access");
-              break;
-          case "SIGN UP":
-            return console.log("sign up access");
-              break;      
-          default :
-              break;  
-        }
- 
-    console.log("error");
-  }
-
-  
-  const headLink = [ 
-    {title:'roadmap' , path: '/' }, 
-    {title:'discover' , path: '/discover' },
-    {title:'gallery' , path: '/gallery' },
-    {title:'login' , path: '/login' }
-  ];
 
   const displayLargeMenu = () => {
     
@@ -194,7 +161,7 @@ export default function NavigationBar() {
               <Tab label="Roadmap" component={Link} to={"/"} />
               <Tab label="Discover"component={Link} to={"/discover"} />
               <Tab label="Gallery" component={Link} to={"/gallery"} />
-              <Tab label="Signup" />
+              <Tab label="Signup"  component={Link} to={"/signup"} />
             </Tabs>
 
 
