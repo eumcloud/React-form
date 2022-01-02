@@ -1,4 +1,7 @@
 import React, { useEffect, useState }      from 'react';
+import {Link}                              from 'react-router-dom';
+import MenuIcon                            from '@material-ui/icons/Menu';
+import { makeStyles }                      from '@material-ui/core/styles';
 import {
   Container, 
   Toolbar,
@@ -11,12 +14,6 @@ import {
   Tabs,
   Tab
 } from '@material-ui/core'; 
-import {Link} from 'react-router-dom';
-
-import MenuIcon   from '@material-ui/icons/Menu';
-
-import { makeStyles } from '@material-ui/core/styles';
-
 
 const useStyles = makeStyles((theme) => ({
   
@@ -164,23 +161,6 @@ export default function NavigationBar() {
               <Tab label="Signup"  component={Link} to={"/signup"} />
             </Tabs>
 
-
-
-          {/* {headLink.map(({title, path}) => (
-  
-            <Ta
-              href={path}
-              component='tab'
-              variant='body1'
-              className={classes.title}
-              onClick={menuHandler}
-            >
-              {title.toUpperCase()}
-            </Ta>
-            
-    
-          ))}
-     */}
         </Box>
     
       </Toolbar>
