@@ -57,7 +57,7 @@ exports.login = (req, res) => {
 }
 
 
-exports.register = (req, res) => {
+exports.signup = (req, res) => {
         console.log(req.body);
         const { userid, email, userpwd, pwdConfirm} = req.body;
 
@@ -65,11 +65,11 @@ exports.register = (req, res) => {
             if(err) throw err;
 
             if(results > 0) {
-                return res.render('register', {
+                return res.render('signup', {
                     message : 'That email is already in use'
                 });
             } else if( userpwd !== pwdConfirm) {
-                return res.render('register', {
+                return res.render('signup', {
                     message: 'Password do not match'
                 });
             }
