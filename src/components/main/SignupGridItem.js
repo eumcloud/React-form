@@ -1,76 +1,111 @@
-import Grid       from '@material-ui/core/Grid';
-import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
-import  AddCircleOutlineOutlinedIcoun  from '@material-ui/icons/AddCircleOutlineOutlined';
-import Typography from '@material-ui/core/Typography';
-import React      from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Image from '../../static/img/testimg.png';
-import { TextField } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import React from 'react'
+import { makeStyles } from '@material-ui/core';
+import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { FormHelperText } from '@material-ui/core'
+import * as Yup from 'yup'
 
 const useStyles = makeStyles(theme => ({
-    mainContainer: {
-        height: 400,
-        backgroundImage: `url(${Image})`,
-        color: theme.palette.common.white
-    },
-    mainItem: {
-        padding: theme.spacing(3),
-        textAlign: 'left',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
     signUpMain: {
-        height: 800,
-        color: theme.palette.common.white,
-        justifyContent: 'center'
-       
+        display: "flex",
+        top: 200
     }
 
 }))
 
 export default function SignupGridItem() {
+    
+    const paperStyle = { padding: 40, width: 340, margin: "20px auto" }
+    const headerStyle = { margin: 0 }
+    const avatarStyle = { backgroundColor: '#1bbd7e' }
+    const marginTop = { marginTop: 5 }
+    const initialValues = {
+        name: '',
+        email: '',
+        gender: '',
+        phoneNumber: '',
+        password: '',
+        confirmPassword: '',
+        termsAndConditions: false
+    }
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().min(3, "It's too short").required("Required"),
+        email: Yup.string().email("Enter valid email").required("Required"),
+        gender: Yup.string().oneOf(["male", "female"], "Required").required("Required"),
+        phoneNumber: Yup.number().typeError("Enter valid Phone Number").required('Required'),
+        password: Yup.string().min(8, "Password minimum length should be 8").required("Required"),
+        confirmPassword: Yup.string().oneOf([Yup.ref('password')], "Password not matched").required("Required"),
+        termsAndConditions: Yup.string().oneOf(["true"], "Accept terms & conditions")
+    })
 
     const classes = useStyles();
 
-    const paperStyle = {
-            padding: '30px 20px',
-            width:300,
-            margin:'20px auto'
-    }
-    const avatarStyle = {
-        backgroundColor: '#1bbd7e'
-    }
-    const headerStyle = {
-        backgroundColor: '#1bbd7e'
+    const onSubmit = (values, props) => {
+        console.log(values)
+        console.log(props)
+        setTimeout(() => {
+
+            props.resetForm()
+            props.setSubmitting(false)
+        }, 2000)
     }
 
     return(
-        <Grid container className={classes.signUpMain}>
-
-            <Grid item className={classes.mainItem} md={6}>
-                <Grid align='center'>
+        <Grid>
+            <Paper style={paperStyle} >
+                <Grid align='center' >
                     <Avatar style={avatarStyle}>
-                        <AddCircleOutlineOutlinedIcoun />
+                        <AddCircleOutlineOutlinedIcon />
                     </Avatar>
-
-                    <Paper elevation={20} style={paperStyle}>
-                        <h2 style={headerStyle}>Sign up.</h2>
-                      <Typography variant='caption'>Please fill this form to create an account.</Typography>  
-                        <form>
-                            <TextField fullWidth label='Name'/>
-                            <TextField fullWidth label='Email'/>
-                            <TextField fullWidth label='Phone Number'/>
-                            <TextField fullWidth label='Password'/>
-                            <TextField fullWidth label='Confirm Password'/>
-                            <Button type='submit' variant='contained' color='primary'>Sign up</Button>
-                        </form>
-                    </Paper>
+                    <h2 style={headerStyle}>Sign Up</h2>
+                    <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
                 </Grid>
-            </Grid>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    {(props) => (
+                       <Form>
+
+                       <Field as={TextField} fullWidth name="name" label='Name'
+                           placeholder="Enter your name" helperText={<ErrorMessage name="name" />} />
+                       <Field as={TextField} fullWidth name="email" label='Email'
+                           placeholder="Enter your email" helperText={<ErrorMessage name="email" />} />
+                       <FormControl component="fieldset" style={marginTop}>
+                           <FormLabel component="legend">Gender</FormLabel>
+                           < Field as={RadioGroup} aria-label="gender" name="gender" name="gender" style={{ display: 'initial' }}>
+                               <FormControlLabel value="female" control={<Radio />} label="Female" />
+                               <FormControlLabel value="male" control={<Radio />} label="Male" />
+                           </ Field>
+                       </FormControl>
+                       <FormHelperText><ErrorMessage name="gender" /></FormHelperText>
+                       <Field as={TextField} fullWidth name="phoneNumber" label='Phone Number'
+                           placeholder="Enter your phone number" helperText={<ErrorMessage name="phoneNumber" />} />
+                       <Field as={TextField} fullWidth name='password' type="password"
+                           label='Password' placeholder="Enter your password"
+                           helperText={<ErrorMessage name="password" />} />
+                       <Field as={TextField} fullWidth name="confirmPassword" type="password"
+                           label='Confirm Password' placeholder="Confirm your password"
+                           helperText={<ErrorMessage name="confirmPassword" />} />
+                       <FormControlLabel
+                           control={<Field as={Checkbox} name="termsAndConditions" />}
+                           label="I accept the terms and conditions."
+                       />
+                       <FormHelperText><ErrorMessage name="termsAndConditions" /></FormHelperText>
+                       <Button type='submit' variant='contained' disabled={props.isSubmitting}
+                           color='primary'>{props.isSubmitting ? "Loading" : "Sign up"}</Button>
+
+                   </Form>
+                      )}
+                      </Formik>
+            </Paper>
         </Grid>
     )
 
 }
+  
