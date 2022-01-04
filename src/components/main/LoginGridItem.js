@@ -3,8 +3,9 @@ import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@materia
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
 
 const Login=({ handleChange })=>{
 
@@ -12,16 +13,26 @@ const Login=({ handleChange })=>{
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     const initialValues = {
-        username: '',
-        password: '',
+        email: '',
+        userpwd: '',
         remember: false
     }
     const validationSchema = Yup.object().shape({
-        username: Yup.string().email('please enter valid email').required("Required"),
-        password: Yup.string().required("Required")
+        email: Yup.string().email('please enter valid email').required("Required"),
+        userpwd: Yup.string().required("Required")
     })
     const onSubmit = (values, props) => {
-        console.log(values)
+        console.log("values " + props)
+
+        axios.post(`${process.env.REACT_APP_API}/post`, {email, userpwd, remember})
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error.response)
+            alert(error.response.data.error)
+        })
+
         setTimeout(() => {
             props.resetForm()
             props.setSubmitting(false)
@@ -38,13 +49,13 @@ const Login=({ handleChange })=>{
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                     {(props) => (
                         <Form>
-                            <Field as={TextField} label='Username' name="username"
-                                placeholder='Enter username' fullWidth required
-                                helperText={<ErrorMessage name="username" />}
+                            <Field as={TextField} label='Email' name="email"
+                                placeholder='Enter Email' fullWidth required
+                                helperText={<ErrorMessage name="email" />}
                             />
-                            <Field as={TextField} label='Password' name="password"
+                            <Field as={TextField} label='Password' name="userpwd"
                                 placeholder='Enter password' type='password' fullWidth required
-                                helperText={<ErrorMessage name="password" />} />
+                                helperText={<ErrorMessage name="userpwd" />} />
                             <Field as={FormControlLabel}
                                 name='remember'
                                 control={
@@ -55,7 +66,7 @@ const Login=({ handleChange })=>{
                                 label="Remember me"
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Sign in"}</Button>
+                                style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Log in"}</Button>
 
                         </Form>
                     )}

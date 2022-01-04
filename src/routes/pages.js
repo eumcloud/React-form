@@ -12,20 +12,20 @@ router.get('*', function (req, res) {
   });              
 
 
-// authController.isLoggedIn, 
-// router.get('/', (req, res) => {
-//     res.render('index', {
-//         user: req.user
+authController.isLoggedIn, 
+router.get('/', (req, res) => {
+    res.render('index', {
+        user: req.user
    
-//     }
-//     );
-//     console.log('index rendered');
-// });
+    }
+    );
+    console.log('index rendered');
+});
 
-// router.get('/signup', (req, res) => {
-//     res.render('signup');
-//     console.log('signup rendered');
-// });
+router.get('/signup', (req, res) => {
+    res.render('signup');
+    console.log('signup rendered');
+});
 
 
 

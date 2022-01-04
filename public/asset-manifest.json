@@ -1,0 +1,13 @@
+{
+  "main.js": "./static/js/main.1180c158.chunk.js",
+  "main.js.map": "./static/js/main.1180c158.chunk.js.map",
+  "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
+  "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
+  "static/js/2.594201c1.chunk.js": "./static/js/2.594201c1.chunk.js",
+  "static/js/2.594201c1.chunk.js.map": "./static/js/2.594201c1.chunk.js.map",
+  "index.html": "./index.html",
+  "precache-manifest.37fdb2b75616b3a5390075928a9669dd.js": "./precache-manifest.37fdb2b75616b3a5390075928a9669dd.js",
+  "service-worker.js": "./service-worker.js",
+  "static/media/madal.jpg": "./static/media/madal.6fde39d1.jpg",
+  "static/media/testimg.png": "./static/media/testimg.135a2f4a.png"
+}

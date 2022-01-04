@@ -9,33 +9,36 @@ import Signup from '../../components/main/SignupGridItem';
 import { Grid } from '@material-ui/core';
 
 const SignInOutContainer=()=>{
-const [value,setValue]=useState(0)
-const handleChange = (event, newValue) => {
+
+  const [value,setValue]=useState(0)
+
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const paperStyle={width:340,margin:"20px auto",marginTop: 70}
+  const paperStyle={width:340,margin:"20px auto"}
 
   function TabPanel(props) {
+    
     const { children, value, index, ...other } = props;
-  
-    return (
-      <Grid>
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-      </Grid>
-    );
+
+      return (
+        <Grid>
+          <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+          >
+            {value === index && (
+              <Box>
+                <Typography>{children}</Typography>
+              </Box>
+            )}
+          </div>
+        </Grid>
+      );
   }
   
     return (
@@ -50,7 +53,7 @@ const handleChange = (event, newValue) => {
           onChange={handleChange}
           aria-label="disabled tabs example"
         >
-          <Tab label="Sign In" />
+          <Tab label="Log In" />
          
           <Tab label="Sign Up" />
         </Tabs>
