@@ -1,25 +1,36 @@
+const fs = require("fs")
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const path = require("path");
+const port = process.env.PORT || 5000;
+const cors = require("cors");
+const mysql = require("mysql");
 
-const boards = require("./src/routes/board/Board");
-const products = require("./src/routes/product/Product");
-const mains = require("./src/routes/main/Main");
-const mypages = require("./src/routes/mypage/Mypage");
+app.use(cors());  
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(path.join(__dirname, 'build')));
 
-app.use("/board", boards);
-app.use("/product", products);
-app.use("/main", mains);
-app.use("/mypage", mypages);
+const data = fs.readFileSync("./database.json");
+const conf = JSON.parse(data);
 
-app.get("/", (req, res)=>{
-    res.sendFile(path.join(__dirname, "build/index.html"));
+const connection = mysql.createConnection({
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  port: conf.port,
+  database: conf.database
+});
+connection.connect();
+
+
+app.get("/api/products", (req, res) => {
+    connection.query(
+      "SELECT * FROM Products",
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    )
 });
 
-const host = "127.0.0.1";
-const port = 3000;
-app.listen(port, ()=>{
-    console.log(`ReactProject is running  ---http://${host}:${port}`);
-});
+app.listen(port, () => console.log(`Listening on port ${port}`))
