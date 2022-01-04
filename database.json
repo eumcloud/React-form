@@ -1,0 +1,7 @@
+{
+  "host": "54.180.127.20",
+  "user": "test",
+  "password": "1234",
+  "port": "3306",
+  "database": "testDB"
+}
