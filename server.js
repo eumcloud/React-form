@@ -1,4 +1,3 @@
-const fs = require("fs")
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -8,7 +7,7 @@ const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 app.use(express.json());
-
+const fs = require("fs")
 
 app.use(cors());  
 app.use(bodyParser.json());
@@ -38,12 +37,11 @@ connection.connect((err) => {
 
 app.use('/auth', require('./client/src/routes/auth'))
 
-app.post('/signup', console.log("post!!!!"));
-
-app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/public/index.html'));
-  console.log('index rendered');
-});              
+// app.post('/signup', console.log("post!!!!"));
+// app.use('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, './client/public/index.html'));
+//   console.log('index rendered');
+// });              
 
 
 

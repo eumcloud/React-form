@@ -22,7 +22,7 @@ const Login=({ handleChange })=>{
         userpwd: Yup.string().required("Required")
     })
     const onSubmit = (values, props) => {
-        console.log("values " + props)
+        console.log(values + props)
         const {email, userpwd, remember} = values;
 
         axios.post(`http://localhost:5000/auth/login`, {email, userpwd, remember})

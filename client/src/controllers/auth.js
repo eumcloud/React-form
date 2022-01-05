@@ -72,22 +72,28 @@ exports.signup = (req, res) => {
             if(err) throw err;
 
             if(results > 0) {
-                return res.render('signup', {
+                // return res.render('signup', {
+                //     message : 'That email is already in use'
+                // });
+                return res.send({
                     message : 'That email is already in use'
                 });
             } else if( userpwd !== pwdConfirm) {
-                return res.render('signup', {
+                // return res.render('signup', {
+                //     message: 'Password do not match'
+                // });
+                return res.send({
                     message: 'Password do not match'
                 });
             }
             let hashedPwd = await bcrypt.hash(userpwd, 8);
             console.log(hashedPwd);
             
-            db.query('INSERT INTO users SET ?', {userid: userid,email: email,gender: gender,phoneNumber: phoneNumber,termsAndConditions: termsAndConditions,  userpwd: hashedPwd, email: email,}, (err, results) =>{
+            db.query('INSERT INTO users SET ?', {userid: userid,email: email,gender: gender,phoneNumber: phoneNumber,termsAndConditions: termsAndConditions,  userpwd: hashedPwd, email: email}, (err, results) =>{
                 if(err) throw err;
                 
                 console.log(results);
-                return res.redirect('/'), console.log("login");
+                return res.redirect('/signup'), console.log("sssssssssss");
             });
         });
 
