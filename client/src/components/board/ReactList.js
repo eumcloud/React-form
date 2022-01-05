@@ -9,17 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1, "why", 6.0, 24, 4.0),
-  createData(2, "react", 9.0, 37, 4.3),
-  createData(3, "so", 16.0, 24, 6.0),
-  createData(4, "hard", 3.7, 67, 4.3),
-];
-
 export default function BasicTable() {
   const [inputData, setInputData] = useState([{
     bidx: '',
