@@ -12,6 +12,7 @@ import { FormHelperText } from '@material-ui/core';
 import * as Yup from 'yup';
 import axios from 'axios';
 
+
 export default function SignupGridItem() {
     
     const paperStyle = { padding: 40, width: 340, margin: "20px auto" }
@@ -39,11 +40,12 @@ export default function SignupGridItem() {
     })
 
     const onSubmit = (values, props) => {
-
+        const {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions} = values;
         console.log(values)
         console.log(props)
+
         
-        axios.post(`${process.env.REACT_APP_API}/post`, authController.signup , {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions})
+        axios.post(`http://localhost:5000/signup`, {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions})
         .then(response => {
             console.log(response);
         })

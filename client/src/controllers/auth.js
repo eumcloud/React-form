@@ -3,12 +3,18 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require('util');
 
+
+const data = fs.readFileSync("../../../../databse.json");
+const conf = JSON.parse(data);
+
 const db = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-  });
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  port: conf.port,
+  database: conf.database
+});
+
 
 exports.login = (req, res) => {
     try {
@@ -77,11 +83,11 @@ exports.signup = (req, res) => {
             let hashedPwd = await bcrypt.hash(userpwd, 8);
             console.log(hashedPwd);
             
-            db.query('INSERT INTO users SET ?', {userid: userid, userpwd: hashedPwd, email: email,}, (err, results) =>{
+            db.query('INSERT INTO users SET ?', {userid: userid,email: email,gender: gender,phoneNumber: phoneNumber,termsAndConditions: termsAndConditions,  userpwd: hashedPwd, email: email,}, (err, results) =>{
                 if(err) throw err;
                 
                 console.log(results);
-                return res.redirect('/login'), console.log("login");
+                return res.redirect('/'), console.log("login");
             });
         });
 
