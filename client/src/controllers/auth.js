@@ -2,9 +2,9 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require('util');
+const fs = require("fs")
 
-
-const data = fs.readFileSync("../../../../databse.json");
+const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data);
 
 const db = mysql.createConnection({
