@@ -36,7 +36,7 @@ connection.connect((err) => {
 });
 
 app.use('/auth', require('./client/src/routes/auth'))
-
+app.use('/auth/signup', require('./client/src/routes/auth'))
 // app.post('/signup', console.log("post!!!!"));
 // app.use('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, './client/public/index.html'));

@@ -43,7 +43,7 @@ export default function SignupGridItem() {
         const {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions} = values;
         console.log(values)
         console.log(props)
-        axios.post(`http://localhost:5000/signup`, {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions})
+        axios.post(`http://localhost:5000/auth/signup`, {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions})
         .then(response => {
             console.log(response);
         })
@@ -80,7 +80,7 @@ export default function SignupGridItem() {
 
                        <FormControl component="fieldset">
                            <FormLabel component="legend">Gender</FormLabel>
-                           < Field as={RadioGroup} aria-label="gender" name="gender" name="gender" style={{ display: 'initial' }}>
+                           < Field as={RadioGroup} aria-label="gender" name="gender" style={{ display: 'initial' }}>
                                <FormControlLabel value="female" control={<Radio />} label="Female" />
                                <FormControlLabel value="male" control={<Radio />} label="Male" />
                            </ Field>
