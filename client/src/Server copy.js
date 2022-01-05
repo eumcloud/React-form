@@ -33,7 +33,7 @@ db.connect((err) => {
     console.log("MySQL Conected!!!");
 });
 
-app.use('/auth', require('./routes/auth'));
+router.use('/auth', require('./routes/auth'));
 
 app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'));
