@@ -21,7 +21,6 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
          
-
 const publicDirectory = path.join(__dirname, '/public');  
 app.use(express.static(publicDirectory));   
 app.use(express.urlencoded({ extended: false }));
@@ -34,18 +33,13 @@ db.connect((err) => {
     console.log("MySQL Conected!!!");
 });
 
-
+router.use('/auth', require('./routes/auth'));
 
 app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'));
     console.log('index rendered');
   });              
 
-  app.use('/auth', require('./routes/auth'));
-
-
-// app.use('/', require('./routes/pages'));
-// app.use('/auth', require('./routes/auth'));
 app.listen(port, () => {
     console.log(`Server is running at ${port}`)
 });

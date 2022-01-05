@@ -57,9 +57,10 @@ exports.login = (req, res) => {
 }
 
 
+
 exports.signup = (req, res) => {
         console.log(req.body);
-        const { userid, email, userpwd, pwdConfirm} = req.body;
+        const { userid, email,gender, phoneNumber, userpwd, pwdConfirm, termsAndConditions } = req.body;
 
         db.query('SELECT email from users WHERE email = ?', [email], async (err, results) =>{
             if(err) throw err;
@@ -80,9 +81,7 @@ exports.signup = (req, res) => {
                 if(err) throw err;
                 
                 console.log(results);
-                return res.render('register', {
-                message: 'Register complete.'
-                })
+                return res.redirect('/login'), console.log("login");
             });
         });
 
