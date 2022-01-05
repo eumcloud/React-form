@@ -31,7 +31,7 @@ export default function BasicTable() {
     blikeuser: ''
   }])
 
-  // const {bidx, buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser} =inputData;
+  const {bidx, buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser} =inputData;
 
   const callApi = async() => {
     const response = await axios.get("http://localhost:5000/api/boards")
@@ -44,7 +44,7 @@ export default function BasicTable() {
     // }))
     console.log(inputData)
     console.log(response.data)
-    // setInputData({...inputData, bidx:"ssssss", sdfsdf:"asda"})
+    setInputData({...inputData, bidx:"ssssss", sdfsdf:"asda"})
     setInputData([...inputData,...response.data])
   }
   

@@ -24,7 +24,9 @@ const Login=({ handleChange })=>{
     const onSubmit = (values, props) => {
         console.log(values + props)
         const {email, userpwd, remember} = values;
-
+        console.log(email);
+        console.log(userpwd);
+        console.log(remember);
         axios.post(`http://localhost:5000/auth/login`, {email, userpwd, remember})
         .then(response => {
             console.log(response);

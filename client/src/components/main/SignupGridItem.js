@@ -13,6 +13,8 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 
+
+
 export default function SignupGridItem() {
     
     const paperStyle = { padding: 40, width: 340, margin: "20px auto" }
