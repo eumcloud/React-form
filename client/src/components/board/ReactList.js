@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,6 +21,55 @@ const rows = [
 ];
 
 export default function BasicTable() {
+  const [inputData, setInputData] = useState([{
+    bidx: '',
+    buserid: 'b',
+    btitle: '',
+    bcontent: '',
+    regdate: '',
+    modidate: '',
+    bhit: '',
+    blikeuser: ''
+  },
+  {
+    bidx: '',
+    buserid: '',
+    btitle: '',
+    bcontent: '',
+    regdate: '',
+    modidate: '',
+    bhit: '',
+    blikeuser: ''
+  }])
+
+  const {bidx, buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser} =inputData;
+
+  const callApi = async() => {
+    const response = await axios.get("http://localhost:5000/api/boards")
+    // const _inputData = await response.data.map((rowData) => ({
+    //   bidx: rowData.bidx,
+    //   title: rowData.btitle,
+    //   content: rowData.bcontent,
+    //   writer: rowData.bidx,
+    //   write_date: rowData.bidx,
+    // }))
+    console.log(inputData)
+    console.log(response.data)
+    // setInputData({...inputData, bidx:"ssssss", sdfsdf:"asda"})
+    setInputData([...inputData,...response.data])
+  }
+  
+  useEffect(() => {
+    callApi();
+  }, []);
+
+  console.log(inputData)
+  // return (inputData.map(a => {
+  //   return (<div>{a.buserid}</div>)
+  // })
+  // )
+
+
   return (
     <TableContainer >
       <Table sx={{ maxWidth: 650 }} aria-label="simple table">
@@ -32,18 +83,18 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {inputData.map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.buserid}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.btitle}</TableCell>
+              <TableCell align="right">{row.bhit}</TableCell>
+              <TableCell align="right">{row.regdate}</TableCell>
+              <TableCell align="right">{row.modidate}</TableCell>
             </TableRow>
           ))}
         </TableBody>

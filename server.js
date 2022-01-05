@@ -33,4 +33,13 @@ app.get("/api/products", (req, res) => {
     )
 });
 
+app.get("/api/boards", (req, res) => {
+    connection.query(
+      "SELECT * FROM Boards",
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    )
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`))
