@@ -29,7 +29,7 @@ const Login=({ handleChange })=>{
         const {email, userpwd} = values;
         console.log(email);
         console.log(userpwd);
-        axios.get(`http://localhost:5000/auth/signin`, { email: email, userpwd: userpwd })
+        axios.post(`http://localhost:5000/auth/signin`, { email, userpwd })
         .then(response => {
             console.log(response);
         })

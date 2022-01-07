@@ -8,6 +8,7 @@ const auth = require("./client/src/routes/auth");
 const port = 5000;
 const cors = require("cors");
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());

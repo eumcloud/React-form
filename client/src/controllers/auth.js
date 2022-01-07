@@ -18,7 +18,7 @@ exports.singin = (req, res) => {
     try {
         
         const {email, userpwd} = req.body;
-
+        console.log("signin post request: " + email)
         if(!email || !userpwd) {
             return res.send({
                 message: 'Please provide email and password'
@@ -27,6 +27,8 @@ exports.singin = (req, res) => {
         }
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
 
+            console.log("db query connected")
+
             if( !results || !(await bcrypt.compare(userpwd, results[0].userpwd) ) ) {
                 console.log(results);
                 res.send({
@@ -34,20 +36,20 @@ exports.singin = (req, res) => {
                 });
             } else {
                 const userid = results[0].userid
-                const token = jwt.sign({userid: userid}, process.env.JWT_SECRET, {
-                    expiresIn: process.env.JWT_EXPIRES_IN
+                const token = jwt.sign({userid: userid}, conf.JWT_SECRET, {
+                    expiresIn: conf.JWT_EXPIRES_IN
                 });
                 console.log('The token is: ' + token);
 
                 const cookieOption = {
                     expiresIn: new Date(
-                        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+                        Date.now() + conf.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
                     ),
                     httpOnly: true
                 }
 
                  res.cookie('jwt', token, cookieOption);
-                 res.status(200).redirect("/");
+                 res.send({message : "sign in success"});
             }
         })
 

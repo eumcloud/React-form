@@ -3,5 +3,8 @@
   "user": "test",
   "password": "1234",
   "port": "3306",
-  "database": "testDB"
+  "database": "testDB",
+  "JWT_SECRET": "mysupersecretpassword",
+  "JWT_EXPIRES_IN": "90d",
+  "JWT_COOKIE_EXPIRES": "90d"
 }
