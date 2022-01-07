@@ -2,8 +2,7 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require('util');
-const fs = require("fs")
-
+const fs = require("fs");
 const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data);
 
@@ -15,14 +14,13 @@ const db = mysql.createConnection({
   database: conf.database
 });
 
-
-exports.login = (req, res) => {
+exports.singin = (req, res) => {
     try {
-        const { email, userpwd } = req.body;
         
+        const {email, userpwd} = req.body;
 
         if(!email || !userpwd) {
-            return res.status(400).render('login', {
+            return res.send({
                 message: 'Please provide email and password'
             });
            
@@ -31,9 +29,8 @@ exports.login = (req, res) => {
 
             if( !results || !(await bcrypt.compare(userpwd, results[0].userpwd) ) ) {
                 console.log(results);
-                res.status(401).render('login', {
+                res.send({
                     message: 'email or password is incorrect.'
-                    
                 });
             } else {
                 const userid = results[0].userid
@@ -66,7 +63,7 @@ exports.login = (req, res) => {
 
 exports.signup = (req, res) => {
         console.log(req.body);
-        const { userid, email,gender, phoneNumber, userpwd, pwdConfirm, termsAndConditions } = req.body;
+        const { userid, email ,gender, phoneNumber, userpwd, pwdConfirm, termsAndConditions } = req.body;
 
         db.query('SELECT email from users WHERE email = ?', [email], async (err, results) =>{
             if(err) throw err;
@@ -89,11 +86,11 @@ exports.signup = (req, res) => {
             let hashedPwd = await bcrypt.hash(userpwd, 8);
             console.log(hashedPwd);
             
-            db.query('INSERT INTO users SET ?', {userid: userid,email: email,gender: gender,phoneNumber: phoneNumber,termsAndConditions: termsAndConditions,  userpwd: hashedPwd, email: email}, (err, results) =>{
+            db.query('INSERT INTO users SET ?', {userid: userid, email: email,gender: gender,phoneNumber: phoneNumber,termsAndConditions: termsAndConditions,  userpwd: hashedPwd, email: email}, (err, results) =>{
                 if(err) throw err;
                 
                 console.log(results);
-                return res.redirect('/signup'), console.log("sssssssssss");
+                return res.redirect('/signupssssssss')
             });
         });
 

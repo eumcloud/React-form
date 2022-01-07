@@ -1,23 +1,23 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
-const cors = require("cors");
+const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
-const path = require("path");
 const fs = require("fs")
 const auth = require("./client/src/routes/auth");
 const port = 5000;
-app.use(cors());  
+const cors = require("cors");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());  
+app.use('/auth', auth);
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
-
 const connection = mysql.createConnection({
   host: conf.host,
   user: conf.user,
@@ -30,9 +30,6 @@ connection.connect((err) => {
   if(err) throw err;
   console.log("MySQL Conected!!!");
 });
-
-
-app.use('/auth', auth);
 
 app.get("/api/products", (req, res) => {
     connection.query(

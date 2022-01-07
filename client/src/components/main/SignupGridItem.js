@@ -54,10 +54,10 @@ export default function SignupGridItem() {
             alert(error.response.data.error)
         })
 
-        setTimeout(() => {
-            props.resetForm()
-            props.setSubmitting(false)
-        }, 2000)
+        // setTimeout(() => {
+        //     props.resetForm()
+        //     props.setSubmitting(false)
+        // }, 2000)
     }
 
     return(
