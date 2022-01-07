@@ -6,6 +6,9 @@ import Discover from "./containers/main/Discover";
 import Gallery from "./containers/main/Gallery";
 import Signup from "./containers/main/Signup";
 import NoPage from "./components/Nopage";
+import BoardLayout from "./components/board/BoardLayout";
+import BoardList from "./components/board/BoardList";
+
 
 const Router = () => {
   return (
@@ -18,8 +21,9 @@ const Router = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route path="*" element={<NoPage />} />
 
-        <Route path="/board">
-          <Route exact path="wirte" /*element={}*/ />
+        <Route exact path="/board" element={<BoardLayout />}>
+          <Route exact path="list" element={<BoardList />} />
+          <Route exact path="write" /*element={}*/ />
           <Route exact path="update" /*element={}*/ />
           <Route exact path="read" /*element={}*/ />
           <Route exact path="delete" /*element={}*/ />
