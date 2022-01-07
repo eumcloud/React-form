@@ -5,7 +5,7 @@ const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const fs = require("fs")
 const auth = require("./client/src/routes/auth");
-const port = 5000;
+const port = 3001;
 const cors = require("cors");
 
 

@@ -12,7 +12,6 @@ const Home = ()=>{
                 <Navi />
                   <GridLayouts />
                   <Product />
-                <Footer />
             </TemplateBlock>
         </div>
     )
