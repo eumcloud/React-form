@@ -6,14 +6,11 @@ import Discover from "./containers/main/Discover";
 import Gallery from "./containers/main/Gallery";
 import Signup from "./containers/main/Signup";
 import NoPage from "./components/Nopage";
-<<<<<<< HEAD
 import Product from "./containers/product/Product"
 import Mypage from  "./containers/mypage/MypageContainer"
-=======
 import BoardLayout from "./components/board/BoardLayout";
 import BoardList from "./components/board/BoardList";
 
->>>>>>> 7213f659d860aeda82f6040754a61e41cbdb1357
 
 const Router = () => {
   return (
