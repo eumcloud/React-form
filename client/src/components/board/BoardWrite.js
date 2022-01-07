@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setIn } from "formik";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom"
 
@@ -7,23 +6,24 @@ import {useNavigate} from "react-router-dom"
 function BoardWrite() {
   let navigate = useNavigate(); 
   const [inputs, setInputs] = useState({
-    buserid : '',
+    buserid : '로그인 id',
     btitle : '',
     bcontent : ''
   });
   // const {bidx, buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser} =inputs;
   const onChange = (e) => {
-    const [value, name] = e.target;
+    const {value, name} = e.target;
 
     setInputs({
       ...inputs,
-      [name]:value
+      [name]: value
     });
   }
   const onSubmit = (e) => {
+    
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
     console.log({inputs})
-    axios.post("http://localhost:5000/board/write",{inputs})
+    axios.post("http://localhost:3001/board/write",inputs)
     .then(response => {
       console.log(response);
     })
@@ -36,7 +36,7 @@ function BoardWrite() {
       btitle : '',
       bcontent : ''
     });
-    // navigate("/board/list");
+    navigate("/board/list");
 
     
   }
@@ -48,11 +48,11 @@ function BoardWrite() {
           <tbody>
             <tr>
               <td>작성자</td>
-              <td><input name="buserid" value={inputs.buserid} onChange={onChange}/></td>
+              <td><input name="buserid" value={inputs.buserid} /></td>
             </tr>
             <tr>
               <td>제목</td>
-              <td><input name="btitle"  value={"뭐야"} /></td>
+              <td><input name="btitle" value={inputs.btitle} onChange={onChange}/></td>
             </tr>
             <tr>
               <td>내용</td>

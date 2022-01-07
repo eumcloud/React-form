@@ -48,7 +48,7 @@ export default function BoardList() {
 
 
   const callApi = async() => {
-    const response = await axios.get("http://localhost:5000/api/boards")
+    const response = await axios.get("http://localhost:3001/api/boards")
     // const _inputData = await response.data.map((rowData) => ({
     //   bidx: rowData.bidx,
     //   title: rowData.btitle,
