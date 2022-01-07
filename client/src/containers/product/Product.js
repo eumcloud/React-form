@@ -41,7 +41,7 @@ class Product extends Component {
   }
 
   callApi = async() => {
-    const response = await fetch("http://localhost:5000/api/products");
+    const response = await fetch("http://localhost:3001/api/products");
     const body = await response.json();
     return body;
   }

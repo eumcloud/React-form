@@ -1,5 +1,5 @@
 import React from 'react'
-import TemplateBlock from "../../components/Template";
+import TemplateBlock from "../../components/main/Template";
 import GridLayouts from "./GridLayout";
 import Navi from "../../components/main/NavigationBar";
 import Footer from "../../components/main/Footer";
