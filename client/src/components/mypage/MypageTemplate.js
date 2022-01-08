@@ -22,19 +22,19 @@ const TemplateBlock = styled.div`
 `;
 
 export default function MypageTemplate({ children }) {
-  const today = new Date();
-  const dateString = today.toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  });
-  const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
+  // const today = new Date();
+  // const dateString = today.toLocaleDateString("ko-KR", {
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric"
+  // });
+  // const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
 
   return (
     <>
       <div className="date-align">
-        <h5>{dateString}</h5>
-        <div className="day">{dayName}</div>
+        {/* <h5>{dateString}</h5> */}
+        {/* <div className="day">{dayName}</div> */}
       </div>
       <TemplateBlock>{children}</TemplateBlock>
     </>
