@@ -7,15 +7,22 @@ const fs = require("fs")
 const auth = require("./client/src/routes/auth");
 const port = 5000;
 const cors = require("cors");
-
-
+const authController = require('./client/src/controllers/auth');
+// require("./service/passport");
+// require('./routes/authRoutes')(app);
+// app.use(passport.initialize());
+app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors());  
 app.use('/auth', auth);
+
+// app.use(cookieSession({
+//   name: 'test-session',
+//   keys: ['key1', 'key2']
+// }))
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
@@ -31,6 +38,29 @@ connection.connect((err) => {
   if(err) throw err;
   console.log("MySQL Conected!!!");
 });
+
+
+
+app.get('/', authController.isLoggedIn, (req, res) => {
+  res.render('index', {
+    user: req.user
+  });
+});
+
+
+app.get('/mypage', authController.isLoggedIn, (req, res) => {
+  console.log(req.user);
+  if( req.user ) {
+    res.render('profile', {
+      user: req.user
+    });
+  } else {
+    res.redirect('/login');
+  }
+  
+})
+
+
 
 app.get("/api/products", (req, res) => {
     connection.query(

@@ -7,6 +7,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
+axios.defaults.withCredentials = true
+
 const Login=({ handleChange })=>{
 
     const paperStyle={padding :20,height:'70vh',width:340, margin:"20px auto"}
@@ -29,20 +31,24 @@ const Login=({ handleChange })=>{
         const {email, userpwd} = values;
         console.log(email);
         console.log(userpwd);
-        axios.post(`http://localhost:5000/auth/signin`, { email, userpwd })
-        .then(response => {
-            console.log(response);
+        axios.post(`http://localhost:5000/auth/signin`,  { email, userpwd } )
+        .then(response => {   
+           console.log("recieved token :" + response.token);
+           return response.token;
         })
         .catch(error => {
             console.log(error.response)
             alert(error.response.data.error)
         })
 
-        // setTimeout(() => {
-        //     props.resetForm()
-        //     props.setSubmitting(false)
-        // }, 2000)
-
+        setTimeout(() => {
+            props.resetForm()
+            props.setSubmitting(false)
+        }, 2000)
+        // axios.get(`http://localhost:5000/auth/signin`, { withCredentials: true})
+        // .then(response => {
+        //     console.log(response.date)
+        // })
     }
     return (
         <Grid>

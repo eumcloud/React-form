@@ -14,6 +14,7 @@ import {
   Tabs,
   Tab
 } from '@material-ui/core'; 
+import MypageNavItem from './MypageNavItem';
 
 const useStyles = makeStyles((theme) => ({
   
@@ -58,10 +59,11 @@ export default function NavigationBar() {
   
   const [state, setState] = useState({
     toggleMenu: false,
-    toggleMenuOpen: false
+    toggleMenuOpen: false,
+    isLoggedin: false
   });
   
-  const { toggleMenu, toggleMenuOpen } = state;
+  const { toggleMenu, toggleMenuOpen, isLoggedin } = state;
   
   useEffect(() => {
     
@@ -78,6 +80,8 @@ export default function NavigationBar() {
     window.addEventListener("resize", () => setResponsiveness());
     
   }, []);
+
+
   
   const classes = useStyles();
   
@@ -158,7 +162,9 @@ export default function NavigationBar() {
               <Tab label="Roadmap" component={Link} to={"/"} />
               <Tab label="Discover"component={Link} to={"/discover"} />
               <Tab label="Gallery" component={Link} to={"/gallery"} />
-              <Tab label="Signup"  component={Link} to={"/signup"} />
+              {isLoggedin ? <MypageNavItem /> : <Tab label="Signup"  component={Link} to={"/signup"} /> }
+              
+              
             </Tabs>
 
         </Box>
