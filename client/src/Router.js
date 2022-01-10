@@ -36,7 +36,7 @@ const Router = () => {
         <Route exact path="/board" element={<BoardLayout />}>
           <Route path="page/:page" element={<BoardPage />} />
           <Route exact path="write" element={<BoardWrite />} />
-          <Route exact path="update" element={<BoardUpdate />} />
+          <Route exact path="update/:update" element={<BoardUpdate />} />
           <Route exact path="detail" element={<BoardDetail />} />
           <Route exact path="detail/:detail" element={<BoardDetail />} />
         </Route>
