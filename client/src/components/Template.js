@@ -1,15 +1,16 @@
-import React from 'react'
-import styled from "styled-components"
-// import "./template.css";
+import React from "react";
+import styled from "styled-components";
+
 const TemplateBlock = styled.div`
   width: 512px;
   height: 768px;
 
+  text-align: center;
   background-color: grey;
   position: relative;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.4);
 
   padding: 10px;
   margin: 0 auto;
@@ -20,15 +21,6 @@ const TemplateBlock = styled.div`
     text-align: right;
   }
 `;
-
-const TemplatesBlock = ({children})=>{
-    return(
-        <div>
-          <TemplateBlock >
-            {children}
-            </TemplateBlock>
-        </div>
-    )
-} 
-
-export default TemplateBlock;
+export default function Tempate({ children }) {
+  return <TemplateBlock>{children}</TemplateBlock>;
+}

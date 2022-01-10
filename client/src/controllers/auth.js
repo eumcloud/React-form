@@ -14,7 +14,7 @@ const db = mysql.createConnection({
   database: conf.database
 });
 
-exports.singin = (req, res) => {
+exports.singin = async (req, res) => {
     try {
         
         const {email, userpwd} = req.body;
@@ -24,7 +24,7 @@ exports.singin = (req, res) => {
                 message: 'Please provide email and password'
             });
            
-        }
+}   
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
 
             console.log("db query connected")
@@ -45,11 +45,10 @@ exports.singin = (req, res) => {
                     expiresIn: new Date(
                         Date.now() + conf.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
                     ),
-                    httpOnly: true
+                    httpOnly: false
                 }
-
                  res.cookie('jwt', token, cookieOption);
-                 res.send({message : "sign in success"});
+                 res.status(200).send({ token: token });
             }
         })
 
@@ -92,7 +91,7 @@ exports.signup = (req, res) => {
                 if(err) throw err;
                 
                 console.log(results);
-                return res.redirect('/signupssssssss')
+                return res.redirect('/signup')
             });
         });
 
@@ -107,7 +106,7 @@ exports.isLoggedIn = async (req, res, next) => {
       try {
     
         const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-        process.env.JWT_SECRET
+        conf.JWT_SECRET
         );
   
         console.log(decoded);
