@@ -9,8 +9,7 @@ import Button from '@mui/material/Button';
 
 function BoardDetail() {
   let params = useParams();
-  const detailnum = parseInt(params.detail)
-
+  const bnum = parseInt(params.detail)
   let navigate = useNavigate();
 
   const [inputData, setInputData] = useState({
@@ -24,7 +23,7 @@ function BoardDetail() {
 
   const callApi = async() => {
     const response = await axios.get("http://localhost:3001/api/boards")
-    const datas = response.data.filter(obj => obj.bidx === detailnum)
+    const datas = response.data.filter(obj => obj.bidx === bnum)
     setInputData(datas[0])
   }
   
@@ -32,15 +31,27 @@ function BoardDetail() {
     callApi();
   },[]);
 
+  const {bidx, buserid, btitle, bcontent} = inputData
+  
   
   const onClick = ()=>{
-    navigate("/board/update")
+    navigate(`/board/update/${bnum}`,{state:
+      {
+        bidx: bidx,
+        buserid:buserid,
+        btitle:btitle,
+        bcontent:bcontent
+      }
+    })
   }
 
   const onSubmit = (e) => {
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-    console.log("a")
-    axios.delete("http://localhost:3001/api/boards",{detailnum})
+    axios.delete("http://localhost:3001/api/boards",{
+      params: {
+        bidx: bnum
+      }
+    })
     .then(response => {
       console.log(response);
     })
@@ -48,6 +59,8 @@ function BoardDetail() {
         console.log(error.response.data)
         alert(error.response.data.error)
     })
+
+    navigate(-1);// 뒤로가기
     
   }
   const style= {border: "none", background: "transparent" , resize : "none"}
@@ -81,10 +94,10 @@ function BoardDetail() {
         </table>
         {/* 로그인된 id와 일치할 경우 */}
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button  variant="contained" onClick={onClick}>글 수정하기</Button>
+          <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
         </Box>
         <form onSubmit={onSubmit}>
-          <input name="bidx" type='hidden' value={detailnum} />
+          <input name="bidx" type='hidden' value={bnum} />
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button  variant="contained" type="submit">글 삭제하기</Button>
           </Box>

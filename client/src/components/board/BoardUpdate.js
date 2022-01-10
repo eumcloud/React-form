@@ -2,17 +2,23 @@ import { TextareaAutosize } from "@mui/material";
 import { Box } from '@mui/system';
 import axios from "axios";
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useLocation} from "react-router-dom"
 import Button from '@mui/material/Button';
 
 
 function BoardUpdate() {
+
+  const location = useLocation();
+  const locstate = location.state
+  const bnum = locstate.bidx;
+
   let navigate = useNavigate();
+
   const [inputData, setInputData] = useState({
-    bidx: '해당 idx인데 params로 받을것이다',
-    buserid: 'Boarddb작성자',
-    btitle: 'Boarddb제목',
-    bcontent: 'Boarddb내용',
+    bidx: bnum,
+    buserid: locstate.buserid,
+    btitle: locstate.btitle,
+    bcontent: locstate.bcontent,
   });
   const onChange = (e) => {
     const {value, name} = e.target;
@@ -24,8 +30,8 @@ function BoardUpdate() {
   }
   const onSubmit = (e) => {
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-    console.log({inputData})
-    axios.post("http://localhost:3001/board/update",inputData)
+    console.log("a")
+    axios.put("http://localhost:3001/api/boards",inputData)
     .then(response => {
       console.log(response);
     })
@@ -33,7 +39,7 @@ function BoardUpdate() {
         console.log(error.response.data)
         alert(error.response.data.error)
     })
-    
+    navigate(-1);
   }
 
   const style= {border: "none", background: "transparent" , resize : "none"}
@@ -59,11 +65,11 @@ function BoardUpdate() {
           </tbody>
         </table>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button  variant="contained">변경 내용 저장</Button>
+          <Button type="submit" variant="contained">변경 내용 저장</Button>
         </Box>
       </form>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button  variant="contained">수정 취소</Button>
+          <Button onClick={()=>navigate(-1)} variant="contained">수정 취소</Button>
         </Box>
     </>
   )
