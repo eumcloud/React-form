@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
 
+<<<<<<< HEAD
 // app.use(cookieSession({
 //   name: 'test-session',
 //   keys: ['key1', 'key2']
@@ -32,6 +33,24 @@ const connection = mysql.createConnection({
   password: conf.password,
   port: conf.port,
   database: conf.database
+=======
+const boards = require("./routes/board/Board");
+const products = require("./routes/product/Product");
+const mains = require("./routes/main/Main");
+const mypages = require("./routes/mypage/Mypage");
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.set("views", __dirname + "/views");
+app.set("view engine", "jsx");
+app.engine("jsx", require("express-react-views").createEngine());
+app.use("/board", boards);
+app.use("/product", products);
+app.use("/main", mains);
+app.use("/mypage", mypages);
+
+app.get("/", (req, res)=>{
+    res.sendFile(path.join(__dirname, "build/index.html"));
+>>>>>>> 97d8b643db316632f3122ae16b4db563110341b4
 });
 
 connection.connect((err) => {                           
@@ -40,6 +59,7 @@ connection.connect((err) => {
 });
 
 
+<<<<<<< HEAD
 
 app.get('/', authController.isLoggedIn, (req, res) => {
   res.render('index', {
@@ -119,3 +139,10 @@ app.post("/board/write", (req, res)=>{
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+=======
+const host = "127.0.0.1";
+const port = process.env.PORT || 3000;
+app.listen(port, ()=>{
+    console.log(`ReactProject is running  ---http://${host}:${port}`);
+});
+>>>>>>> 97d8b643db316632f3122ae16b4db563110341b4

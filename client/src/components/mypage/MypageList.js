@@ -16,7 +16,7 @@ const Blocksort = styled.div`
   .lnk {
     a, a:hover, a:visited{text-decoration:none; color:inherit}
     color: "black";
-    textdecoration: "inherit";
+    
   }
 `;
 // const LinkBlock = styled.Link`
