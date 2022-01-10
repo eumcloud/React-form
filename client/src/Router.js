@@ -20,6 +20,7 @@ import Payinfo from "./components/mypage/payinfo/Payinfo";
 import QForm from "./components/mypage/ques/QForm";
 import Qlist from "./components/mypage/ques/Qlist";
 import Secession from "./components/mypage/secession/Secession";
+import ShpAddr from "./components/mypage/shpaddr/ShpAddr";
 
 
 const Router = () => {
@@ -50,12 +51,12 @@ const Router = () => {
           <Route path="buylist" element={<Buylist />} />
           <Route exact path="cart" element={<CartLst />} />
           <Route exact path="queslist" element={<Qlist />} />
-		  <Route exact path="quesform" element={<QForm />} />
+		      <Route path="quesform" element={<QForm />} />
           <Route exact path="delete" /*element={}*/ />
-          <Route exact path="passchange" element={<ChPassword />} />
-          <Route exact path="shipaddr"  />
-          <Route exact path="payinfo" element={<Payinfo />} />
-          <Route exact path="secession" element={<Secession />}  />
+          <Route path="passchange" element={<ChPassword />} />
+          <Route path="shipaddr"  element={<ShpAddr />} />
+          <Route path="payinfo" element={<Payinfo />} />
+          <Route path="secession" element={<Secession />}  />
         </Route>
       </Routes>
     </BrowserRouter>
