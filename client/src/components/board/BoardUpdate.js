@@ -1,19 +1,19 @@
+import { TextareaAutosize } from "@mui/material";
+import { Box } from '@mui/system';
 import axios from "axios";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom"
-import { Box } from '@mui/system';
-import { TextareaAutosize } from "@mui/material";
 import Button from '@mui/material/Button';
 
 
-function BoardWrite() {
-  let navigate = useNavigate(); 
+function BoardUpdate() {
+  let navigate = useNavigate();
   const [inputData, setInputData] = useState({
-    buserid : '로그인 id',
-    btitle : '',
-    bcontent : ''
+    bidx: '해당 idx인데 params로 받을것이다',
+    buserid: 'Boarddb작성자',
+    btitle: 'Boarddb제목',
+    bcontent: 'Boarddb내용',
   });
-  // const {bidx, buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser} =inputData;
   const onChange = (e) => {
     const {value, name} = e.target;
 
@@ -23,10 +23,9 @@ function BoardWrite() {
     });
   }
   const onSubmit = (e) => {
-    
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
     console.log({inputData})
-    axios.post("http://localhost:3001/board/write",inputData)
+    axios.post("http://localhost:3001/board/update",inputData)
     .then(response => {
       console.log(response);
     })
@@ -34,13 +33,6 @@ function BoardWrite() {
         console.log(error.response.data)
         alert(error.response.data.error)
     })
-    setInputData({
-      buserid : '',
-      btitle : '',
-      bcontent : ''
-    });
-    navigate("/board/page/1");
-
     
   }
 
@@ -48,39 +40,34 @@ function BoardWrite() {
 
   return (
     <>
-      <h1>글 작성하기</h1>
+      <h1>글 수정하기</h1>
       <form onSubmit={onSubmit}>
         <table border="1">
           <tbody>
             <tr>
               <td>작성자</td>
-              <td><input name="buserid" value={inputData.buserid} readOnly/></td>
+              <td><input name="buserid" value={inputData.buserid} style={style} readOnly/></td>
             </tr>
             <tr>
               <td>제목</td>
-              <td><input name="btitle" value={inputData.btitle} style={style} onChange={onChange}/></td>
+              <td><input name="btitle" value={inputData.btitle} style={style} onChange={onChange} /></td>
             </tr>
             <tr>
               <td>내용</td>
-              <td>
-                <TextareaAutosize 
-                  value={inputData.bcontent}
-                  style={style}
-                  name='bcontent'
-                  onChange={onChange}
-                  placeholder="content please"
-                  required="required"
-                />
-              </td>
+              <td><TextareaAutosize name="bcontent" value={inputData.bcontent} style={style} onChange={onChange} /></td>
             </tr>
           </tbody>
         </table>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button  variant="contained" type="submit">글 저장하기</Button>
+          <Button  variant="contained">변경 내용 저장</Button>
         </Box>
       </form>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button  variant="contained">수정 취소</Button>
+        </Box>
     </>
   )
 }
 
-export default BoardWrite;
+
+export default BoardUpdate;

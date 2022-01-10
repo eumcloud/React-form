@@ -50,6 +50,23 @@ app.get("/api/boards", (req, res) => {
     )
 });
 
+// app.delete("/api/boards", (req, res) => {
+//   console.log(req)
+//   connection.query(
+//     "DELETE from Boards where bidx="
+//   )
+// })
+
+app.get("/api/comments", (req, res) => {
+  var idx = req.params.idx;
+    connection.query(
+      `SELECT * FROM Comments where board_idx=${idx}`,
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    )
+});
+
 app.post("/board/write", (req, res)=>{
   var buserid = req.body.buserid;
   var btitle = req.body.btitle;
@@ -60,6 +77,6 @@ app.post("/board/write", (req, res)=>{
         connection.query(sQuery, datas,(err, result, fields) => {
           res.send(result)
         });
-}) 
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
