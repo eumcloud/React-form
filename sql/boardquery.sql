@@ -1,5 +1,7 @@
 USE testDB;
 
+select * from users;
+
 create table Boards (
 	bidx int not null auto_increment PRIMARY KEY, 
     buserid varchar(256) null,
@@ -16,15 +18,17 @@ INSERT INTO Boards(buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser
 select * from Boards;
 -- drop table Boards;
 
-select * from users;
-create table commentboard (
+
+create table Comments (
 	cidx int not null auto_increment PRIMARY KEY, 
     cuserid varchar(256) null,
     ccontent varchar(256) null,
     board_idx int,
-    foreign key (board_idx) references userboard(bidx) 
+    foreign key (board_idx) references Boards(bidx) 
     on update cascade on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-select * from commentboard;
--- drop table commentboard;
+INSERT INTO Comments(cuserid, ccontent ) values ('a', 'b');
+
+select * from Comments;
+-- drop table Comments;

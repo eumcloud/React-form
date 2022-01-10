@@ -123,11 +123,11 @@ export default function NavigationBar() {
     return (
 
       <Box>
-      {[{menu:'roadmap', url:"/"}, {menu:'product', url:"/product"}, {menu:'board', url:"board/page/1"}, {menu:'sign up', url:"/signup"}, {menu:'/mypage', url:"/mypage"}].map((menuOption) => (
+      {['roadmap', 'product', 'board', 'sign up', '/mypage'].map((menuOption) => (
   
-        <MenuItem component={Link} to={menuOption.url}> 
+        <MenuItem> 
 
-          {menuOption.menu}
+          {menuOption}
 
         </MenuItem>
 
@@ -161,7 +161,7 @@ export default function NavigationBar() {
             <Tabs className={classes.tabsContainer}>
               <Tab label="Roadmap" component={Link} to={"/"} />
               <Tab label="Product"component={Link} to={"/product"} />
-              <Tab label="Board" component={Link} to={"board/page/1"} />
+              <Tab label="Board" component={Link} to={"/board"} />
               {isLoggedin ? <MypageNavItem /> : <Tab label="Signup"  component={Link} to={"/signup"} /> }
               <Tab label="/Mypage"component={Link} to={"/mypage"} />
               

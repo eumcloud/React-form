@@ -77,16 +77,42 @@ app.get("/api/boards", (req, res) => {
     )
 });
 
+app.put("/api/boards", (req,res) => {
+  var bidx = req.body.bidx;
+  var btitle = req.body.btitle;
+  var bcontent = req.body.bcontent;
+  let sQuery = `UPDATE Boards SET btitle=("${btitle}"), bcontent=("${bcontent}"), modidate=now() where bidx=${bidx}`;  // ? 는 매개변수
+  connection.query(sQuery, (err, result, fields) => {
+    res.send(result)
+  })
+})
+
+app.delete("/api/boards", (req, res) => {
+  var bidx = parseInt(req.query.bidx);
+  connection.query(
+    `DELETE from Boards where bidx=${bidx}`
+  )
+})
+
+app.get("/api/comments", (req, res) => {
+  var idx = req.params.idx;
+    connection.query(
+      `SELECT * FROM Comments where board_idx=${idx}`,
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    )
+});
+
 app.post("/board/write", (req, res)=>{
   var buserid = req.body.buserid;
   var btitle = req.body.btitle;
   var bcontent = req.body.bcontent;
   var datas = [buserid, btitle, bcontent];
-  console.log(req)
     let sQuery = "insert into Boards(buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser) values(?,?,?,now(),now(),0,0)";  // ? 는 매개변수
         connection.query(sQuery, datas,(err, result, fields) => {
           res.send(result)
         });
-}) 
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

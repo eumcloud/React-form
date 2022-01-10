@@ -45,7 +45,7 @@ export default function SignupGridItem() {
         const {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions} = values;
         console.log(values)
         console.log(props)
-        axios.post(`http://localhost:5000/auth/signup`, {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions})
+        axios.post(`http://localhost:3001/auth/signup`, {userid, email, gender, userpwd, phoneNumber, pwdConfirm, termsAndConditions})
         .then(response => {
             console.log(response);
         })

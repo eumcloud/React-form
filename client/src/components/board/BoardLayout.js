@@ -12,7 +12,7 @@ const BoardLayout = () => {
             <nav>
                 <ul className='tabs'>
                         <Box sx={{ display: 'flex', justifyContent: 'right' }}>
-                          <Button component={Link} to="/board/list" variant="contained">글 목록</Button>
+                          <Button component={Link} to="/board/page/1" variant="contained">글 목록</Button>
                         </Box>
                         <Box sx={{ display: 'flex', justifyContent: 'right' }}>
                           <Button component={Link} to="/board/write" variant="contained">글 쓰기</Button>
