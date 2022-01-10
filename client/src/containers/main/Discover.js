@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid           from '@material-ui/core/Grid';
-
 import DiscoverGridItem from '../../components/main/DiscoverGridItem';
 import GridItem from '../../components/main/GridItem';
 import Mando from '../../static/img/madal.jpg';
