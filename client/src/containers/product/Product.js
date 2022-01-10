@@ -41,7 +41,7 @@ class Product extends Component {
   }
 
   callApi = async() => {
-	const Nodehost = "http://localhost:3001" || "https://nodejs00001.run.goorm.io/" ; //3001포트 테스트중
+	const Nodehost = "http://localhost:3001"// || "https://nodejs00001.run.goorm.io/" ; //3001포트 테스트중
     const response = await fetch(Nodehost+"/api/products");
     const body = await response.json();
     return body;
