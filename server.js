@@ -4,10 +4,10 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const fs = require("fs")
-const auth = require("../client/src/routes/auth");
+const auth = require("./client/src/routes/auth");
 const port = 3001;
 const cors = require("cors");
-const authController = require('../client/src/controllers/auth');
+const authController = require('./client/src/controllers/auth');
 // require("./service/passport");
 // require('./routes/authRoutes')(app);
 // app.use(passport.initialize());
