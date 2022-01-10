@@ -31,7 +31,7 @@ const Login=({ handleChange })=>{
         const {email, userpwd} = values;
         console.log(email);
         console.log(userpwd);
-        axios.post(`http://localhost:5000/auth/signin`,  { email, userpwd } )
+        axios.post(`http://localhost:3001/auth/signin`,  { email, userpwd } )
         .then(response => {   
            console.log("recieved token :" + response.token);
            return response.token;

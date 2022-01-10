@@ -13,6 +13,13 @@ import BoardPage from "./components/board/BoardPage";
 import BoardDetail from "./components/board/BoardDetail";
 import BoardWrite from "./components/board/BoardWrite";
 import BoardUpdate from "./components/board/BoardUpdate";
+import Buylist from "./components/mypage/buylist/Buylist";
+import CartLst from "./components/mypage/cart/CartLst";
+import ChPassword from "./components/mypage/passchange/ChPassword";
+import Payinfo from "./components/mypage/payinfo/Payinfo";
+import QForm from "./components/mypage/ques/QForm";
+import Qlist from "./components/mypage/ques/Qlist";
+import Secession from "./components/mypage/secession/Secession";
 
 
 const Router = () => {
@@ -40,14 +47,15 @@ const Router = () => {
           <Route exact path="payment" /*element={}*/ />
         </Route>
         <Route path="/mypage" element={<Mypage />}>
-          <Route exact path="buylist" element={<Mypage />} />
-          <Route exact path="cart" /*element={}*/ />
-          <Route exact path="ques" /*element={}*/ />
+          <Route path="buylist" element={<Buylist />} />
+          <Route exact path="cart" element={<CartLst />} />
+          <Route exact path="queslist" element={<Qlist />} />
+		  <Route exact path="quesform" element={<QForm />} />
           <Route exact path="delete" /*element={}*/ />
-          <Route exact path="passchange" /*element={}*/ />
-          <Route exact path="shipaddr" /*element={}*/ />
-          <Route exact path="payinfo" /*element={}*/ />
-          <Route exact path="exit" /*element={}*/ />
+          <Route exact path="passchange" element={<ChPassword />} />
+          <Route exact path="shipaddr"  />
+          <Route exact path="payinfo" element={<Payinfo />} />
+          <Route exact path="secession" element={<Secession />}  />
         </Route>
       </Routes>
     </BrowserRouter>

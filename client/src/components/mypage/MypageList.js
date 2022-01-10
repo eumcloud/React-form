@@ -45,24 +45,21 @@ export default function MultiSelectTreeView() {
         }}
       >
         <TreeItem nodeId="1" label="구매정보관리">
-          <TreeItem nodeId="2" label="구매내역" />
-          <TreeItem nodeId="3" label="장바구니" />
-          <TreeItem nodeId="4" label="1:1문의" />
+          <TreeItem nodeId="2" label="구매내역" component={Link} to={"/buylist"} />
+          <TreeItem nodeId="3" label="장바구니" component={Link} to={"/mypage/cart"} />
+          <TreeItem nodeId="4" label="1:1문의" component={Link} to={"/queslist"} />
         </TreeItem>
 
         <TreeItem nodeId="5" label="회원정보 관리">
           <Link to="/abc" className="lnk">
-            <TreeItem nodeId="6" label="비밀번호 변경"></TreeItem>
+            <TreeItem nodeId="6" label="비밀번호 변경"component={Link} to={"/passchange"} ></TreeItem>
           </Link>
-          <TreeItem nodeId="7" label="배송지관리" className="lnk" />
-          <TreeItem nodeId="8" label="결제정보관리" className="lnk"></TreeItem>
+          <TreeItem nodeId="7" label="배송지관리" component={Link} to={"/"} />
+          <TreeItem nodeId="8" label="결제정보관리" component={Link} to={"/payinfo"}></TreeItem>
         </TreeItem>
-        <Link
-          to="/abc"
-          /*sx={{ color: "inherit", textDecoration: "none" }} */ className="lnk"
-        >
-          <TreeItem nodeId="19" label="회원탈퇴" />
-        </Link>
+        
+		  <TreeItem nodeId="19" label="회원탈퇴" component={Link} to={"/secession"} />
+        
       </TreeView>
     </Blocksort>
   );
