@@ -47,17 +47,17 @@ const Router = () => {
           <Route exact path="detail" /*element={}*/ />
           <Route exact path="payment" /*element={}*/ />
         </Route>
-        <Route path="/mypage" element={<Mypage />}>
-          <Route path="buylist" element={<Buylist />} />
-          <Route exact path="cart" element={<CartLst />} />
-          <Route exact path="queslist" element={<Qlist />} />
-		      <Route path="quesform" element={<QForm />} />
-          <Route exact path="delete" /*element={}*/ />
-          <Route path="passchange" element={<ChPassword />} />
-          <Route path="shipaddr"  element={<ShpAddr />} />
-          <Route path="payinfo" element={<Payinfo />} />
-          <Route path="secession" element={<Secession />}  />
-        </Route>
+          <Route path="/mypage" element={<Mypage />} /> 
+          <Route path="/mypage/buylist" element={<Buylist />} />
+          <Route exact path="/mypage/cart" element={<CartLst />} />
+          <Route exact path="/mypage/queslist" element={<Qlist />} />
+		      <Route path="/mypage/quesform" element={<QForm />} />
+          <Route exact path="/mypage/delete" /*element={}*/ />
+          <Route path="/mypage/passchange" element={<ChPassword />} />
+          <Route path="/mypage/shipaddr"  element={<ShpAddr />} />
+          <Route path="/mypage/payinfo" element={<Payinfo />} />
+          <Route path="/mypage/secession" element={<Secession />}  />
+        
       </Routes>
     </BrowserRouter>
   );
