@@ -1,3 +1,4 @@
+const { default: axios } = require("axios");
 const db = require("mysql");
 require("dotenv").config();
 
@@ -18,5 +19,6 @@ function getConn(callback){
 
 })
 }
+
 
 module.exports = getConn;

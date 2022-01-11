@@ -5,6 +5,7 @@ import Header from "../Header";
 import { CheckBox } from "@mui/icons-material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+// import Ax from "../../ax";
 
 // 리스트 컬럼 정리
 const THBlock = styled.div`
@@ -66,13 +67,16 @@ const ListContents = styled.div`
   }
   `;
 export default function Lists() {
-  const [lists, setLists] = useState([{
-  }])
+  const urlpath = "http://localhost:3001/mypage/buylist"
+  // const resp = await axios.get(urlpath)
+  // console.log(resp);
+  const [lists, setLists] = useState([])
   
   const callApi = async() => {
     const response = await axios.get("http://localhost:3001/mypage/buylist")
     setLists([...lists,...response.data])
   }
+  console.log(lists);
 
   useEffect(() => {
     callApi();
@@ -91,7 +95,7 @@ export default function Lists() {
       date: dt.toLocaleDateString()
     },
   ];
-  console.log(products);
+  // console.log(products);
   const title = "구매내역";
 
   // 체크박스 넘버 가져올때 ref
@@ -108,15 +112,15 @@ export default function Lists() {
         </THBlock>
         <hr />
         <ListStyled>
-          {products.map((tt) => (
+          {lists.map((tt) => (
             <ListContents>
               <CheckBox value={tt.id} key={tt.id} maxWith="5%" />
               <div className="plist"></div>
-              <a href={tt.url} className="plist">
+              <a  className="plist">
                 <div>{tt.title}</div>
-                <img src={tt.img} alt="상품 로딩중.." />
+                <img src={tt.image} alt="상품 로딩중.." />
                 <div> {tt.price}</div>
-                <div> {tt.date}</div>
+                <div> {tt.tradeDate}</div>
               </a>
             </ListContents>
           ))}
