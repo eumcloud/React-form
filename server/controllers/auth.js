@@ -6,6 +6,7 @@ const fs = require("fs");
 const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data);
 
+
 const db = mysql.createConnection({
   host: conf.host,
   user: conf.user,
@@ -15,8 +16,8 @@ const db = mysql.createConnection({
 });
 
 exports.singin = async (req, res) => {
+
     try {
-        
         const {email, userpwd} = req.body;
         console.log("signin post request: " + email)
         if(!email || !userpwd) {
@@ -24,9 +25,9 @@ exports.singin = async (req, res) => {
                 message: 'Please provide email and password'
             });
            
-}   
+        }   
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-            const user = JSON.stringify(results)
+            const user = JSON.stringify(results[0]);
             console.log("db query results: "+ user );
 
             if( !results || !(await bcrypt.compare(userpwd, results[0].userpwd) ) ) {
@@ -35,7 +36,7 @@ exports.singin = async (req, res) => {
                     message: 'email or password is incorrect.'
                 });
             } else {
-  
+               
                 const userid = results[0].userid
                 const token = jwt.sign({userid: userid}, conf.JWT_SECRET, {
                     expiresIn: conf.JWT_EXPIRES_IN
@@ -49,7 +50,7 @@ exports.singin = async (req, res) => {
                     httpOnly: false
                 }
                  res.cookie('jwt', token, cookieOption);
-                 res.status(200).send({ token: token });
+                 res.status(200).send({ token: token, user: results[0] });
                
             }
         })
@@ -141,6 +142,13 @@ exports.isLoggedIn = async (req, res, next) => {
           expires: new Date(Date.now()+ 2*1000),   // 2 * 1000 밀리세컨드
           httpOnly: true
       });
-
-      res.status(200).redirect('/');
+      try {
+      res.clearCookie("token");
+      return res.json({ message: "sign out"}, ()=> {
+        window.location.replace('/');
+      });
+      
+      } catch (error) {
+          console.log(error);
+      }
   }

@@ -12,12 +12,9 @@ import { FormHelperText } from '@material-ui/core';
 import * as Yup from 'yup';
 import axios from 'axios';
 
-
-
-
 export default function SignupGridItem() {
     
-    const paperStyle = { padding: 40, width: 340, margin: "20px auto" }
+    const paperStyle = { padding: 40, width: 510, margin: "20px auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
 

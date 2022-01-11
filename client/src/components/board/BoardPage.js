@@ -10,7 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import './Paging.css'; 
 import Pagination from "react-js-pagination";
-import Paper from '@mui/material/Paper';
 
 
 
@@ -20,16 +19,7 @@ export default function BoardPage() {
   
   let params = useParams();
   const pagenum = parseInt(params.page)
-  const [inputData, setInputData] = useState([{
-    bidx: 'x',
-    buserid: '운영자',
-    btitle: '공지사항',
-    bcontent: '',
-    regdate: '',
-    modidate: '',
-    bhit: '1238',
-    blikeuser: '1111'
-  }])
+  const [inputData, setInputData] = useState([])
 
   const callApi = async() => {
     const response = await axios.get("http://localhost:3001/api/boards")
@@ -41,12 +31,11 @@ export default function BoardPage() {
   },[]);
 
   const Paging = () => {
-    let navigate = useNavigate(); 
     const [page, setPage] = useState(parseInt(params.page));
     const handlePageChange = (page) => { 
       setPage(page); 
       navigate(`/board/page/${page}`);
-    }; 
+    };
     return (
       <Pagination 
       activePage={page}
@@ -59,6 +48,20 @@ export default function BoardPage() {
       />
     ); 
   }; 
+
+ const onClick = (e) => {
+  const idx = e.target.id
+  axios.put("http://localhost:3001/board/hit",{bidx:idx})
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+        console.log(error.response.data)
+        alert(error.response.data.error)
+    })
+
+  navigate(`/board/detail/${idx}`)
+ }
 
   const pagelist = inputData.slice((pagenum-1)*10,pagenum*10)
 
@@ -85,7 +88,7 @@ export default function BoardPage() {
               <TableCell component="th" scope="row">
                 {row.buserid}
               </TableCell>
-              <TableCell align="right" onClick={()=> navigate(`/board/detail/${row.bidx}`)} >{row.btitle}</TableCell>
+              <TableCell align="right" id={row.bidx} onClick={onClick} >{row.btitle}</TableCell>
               <TableCell align="right">{row.bhit}</TableCell>
               <TableCell align="right">{row.regdate}</TableCell>
             </TableRow>

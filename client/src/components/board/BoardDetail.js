@@ -4,6 +4,7 @@ import React, {useState, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom"
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
+import CommentList from "./CommentList";
 
 
 
@@ -97,11 +98,12 @@ function BoardDetail() {
           <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
         </Box>
         <form onSubmit={onSubmit}>
-          <input name="bidx" type='hidden' value={bnum} />
+          <input name="bidx" type='hidden' />
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button  variant="contained" type="submit">글 삭제하기</Button>
           </Box>
         </form>
+        <CommentList bnum={bnum}/>
     </>
   )
 }
