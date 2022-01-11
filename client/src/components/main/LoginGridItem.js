@@ -40,7 +40,7 @@ const Login=({ handleChange })=>{
                    type: "LOGIN",
                    payload: data
                 })
-                window.localStorage.setItem('user',  state);
+                window.localStorage.setItem('user',  response.data.user);
                 console.log("logged in success !!! // STATE is :"+ JSON.stringify(state));
             })
             .catch(error => {   //FIXME: error
