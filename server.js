@@ -8,9 +8,7 @@ const auth = require("./client/src/routes/auth");
 const port = 3001;
 const cors = require("cors");
 const authController = require('./client/src/controllers/auth');
-// require("./service/passport");
-// require('./routes/authRoutes')(app);
-// app.use(passport.initialize());
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,11 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
-
-// app.use(cookieSession({
-//   name: 'test-session',
-//   keys: ['key1', 'key2']
-// }))
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
