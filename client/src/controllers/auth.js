@@ -24,7 +24,7 @@ exports.singin = async (req, res) => {
                 message: 'Please provide email and password'
             });
            
-}   
+        }   
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
             const user = JSON.stringify(results[0]);
             console.log("db query results: "+ user );

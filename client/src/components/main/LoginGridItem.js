@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
+import {browserHistory} from 'react-router';
 import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -41,6 +42,7 @@ const Login=({ handleChange })=>{
                    payload: data
                 })
                 window.localStorage.setItem('user',  response.data.user);
+                window.location.replace('/');
                 console.log("logged in success !!! // STATE is :"+ JSON.stringify(state));
             })
             .catch(error => {   //FIXME: error
