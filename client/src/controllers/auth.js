@@ -26,7 +26,7 @@ exports.singin = async (req, res) => {
            
 }   
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-            const user = JSON.stringify(results)
+            const user = JSON.stringify(results[0]);
             console.log("db query results: "+ user );
 
             if( !results || !(await bcrypt.compare(userpwd, results[0].userpwd) ) ) {
