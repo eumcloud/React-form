@@ -39,19 +39,16 @@ connection.connect((err) => {
   console.log("MySQL Conected!!!");
 });
 
-
-
 app.get('/', authController.isLoggedIn, (req, res) => {
-  res.render('index', {
+  res.send({
     user: req.user
   });
 });
 
-
 app.get('/mypage', authController.isLoggedIn, (req, res) => {
   console.log(req.user);
   if( req.user ) {
-    res.render('profile', {
+    res.send({
       user: req.user
     });
   } else {

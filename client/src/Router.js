@@ -20,6 +20,7 @@ import Payinfo from "./components/mypage/payinfo/Payinfo";
 import QForm from "./components/mypage/ques/QForm";
 import Qlist from "./components/mypage/ques/Qlist";
 import Secession from "./components/mypage/secession/Secession";
+import ShpAddr from "./components/mypage/shpaddr/ShpAddr";
 
 
 const Router = () => {
@@ -46,17 +47,17 @@ const Router = () => {
           <Route exact path="detail" /*element={}*/ />
           <Route exact path="payment" /*element={}*/ />
         </Route>
-        <Route path="/mypage" element={<Mypage />}>
-          <Route path="buylist" element={<Buylist />} />
-          <Route exact path="cart" element={<CartLst />} />
-          <Route exact path="queslist" element={<Qlist />} />
-		  <Route exact path="quesform" element={<QForm />} />
-          <Route exact path="delete" /*element={}*/ />
-          <Route exact path="passchange" element={<ChPassword />} />
-          <Route exact path="shipaddr"  />
-          <Route exact path="payinfo" element={<Payinfo />} />
-          <Route exact path="secession" element={<Secession />}  />
-        </Route>
+          <Route path="/mypage" element={<Mypage />} /> 
+          <Route path="/mypage/buylist" element={<Buylist />} />
+          <Route exact path="/mypage/cart" element={<CartLst />} />
+          <Route exact path="/mypage/queslist" element={<Qlist />} />
+		      <Route path="/mypage/quesform" element={<QForm />} />
+          <Route exact path="/mypage/delete" /*element={}*/ />
+          <Route path="/mypage/passchange" element={<ChPassword />} />
+          <Route path="/mypage/shipaddr"  element={<ShpAddr />} />
+          <Route path="/mypage/payinfo" element={<Payinfo />} />
+          <Route path="/mypage/secession" element={<Secession />}  />
+        
       </Routes>
     </BrowserRouter>
   );
