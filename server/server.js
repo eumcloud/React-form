@@ -7,7 +7,7 @@ const fs = require("fs")
 const auth = require("./routes/auth");
 const port = 3001;
 const cors = require("cors");
-const authController = require('./client/src/controllers/auth');
+const authController = require('./controllers/auth');
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());

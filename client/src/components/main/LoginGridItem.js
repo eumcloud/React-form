@@ -17,7 +17,7 @@ const Login=({ handleChange })=>{
     const btnstyle = { margin: '8px 0' }
     const { state, dispatch } = useContext(Context);
 
-    console.log("STATE is :"+ JSON.stringify(state));
+    console.log("STATE is :"+ state);
 
     const initialValues = {
         email: '',
@@ -31,20 +31,19 @@ const Login=({ handleChange })=>{
     })
     
     const onSubmit = async (values, props) => {
+
         const {email, userpwd} = values;
+        props.setSubmitting(true);
         await axios.post(`http://localhost:3001/auth/signin`,  { email, userpwd } )
             .then(response => {   
-                console.log("signin response data: " + response.data.user );
-                const {data} = JSON.stringify(response.data.user);
-                console.log("recieved token :" + data);
-               
+                console.log("signin response data: " + response.data.user );  
                dispatch({ 
                    type: "LOGIN",
                    payload: response.data.user
                 })
-                window.localStorage.setItem('user',  JSON.stringify(response.data.user));
-                window.location.replace('/');
-                console.log("logged in success !!! // STATE is :"+ JSON.stringify(response.data.user));
+                window.localStorage.setItem('user',  response.data.user);
+                // window.location.replace('/');
+                console.log("logged in success !!! // STATE is :"+ response.data.user);
             })
             .catch(error => {   //FIXME: error
                 console.log(error.response.data.user)
