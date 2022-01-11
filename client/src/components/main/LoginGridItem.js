@@ -42,8 +42,7 @@ const Login=({ handleChange })=>{
                    payload: response.data.user
                 })
                 window.localStorage.setItem('user',  response.data.user);
-                // window.location.replace('/');
-                console.log("logged in success !!! // STATE is :"+ response.data.user);
+                window.location.replace('/');
             })
             .catch(error => {   //FIXME: error
                 console.log(error.response.data.user)
@@ -53,7 +52,6 @@ const Login=({ handleChange })=>{
                 props.resetForm()
                 props.setSubmitting(false)
             }, 2000)
-        
     }
     return (
         <Grid>
@@ -83,7 +81,6 @@ const Login=({ handleChange })=>{
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Log in"}</Button>
-
                         </Form>
                     )}
                 </Formik>
