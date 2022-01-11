@@ -19,11 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
 
-// app.use(cookieSession({
-//   name: 'test-session',
-//   keys: ['key1', 'key2']
-// }))
-
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
 const connection = mysql.createConnection({
@@ -40,6 +35,7 @@ connection.connect((err) => {
 });
 
 app.get('/', authController.isLoggedIn, (req, res) => {
+
   res.send({
     user: req.user
   });

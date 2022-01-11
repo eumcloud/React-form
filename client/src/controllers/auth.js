@@ -15,8 +15,8 @@ const db = mysql.createConnection({
 });
 
 exports.singin = async (req, res) => {
+
     try {
-        
         const {email, userpwd} = req.body;
         console.log("signin post request: " + email)
         if(!email || !userpwd) {
@@ -35,7 +35,7 @@ exports.singin = async (req, res) => {
                     message: 'email or password is incorrect.'
                 });
             } else {
-  
+               
                 const userid = results[0].userid
                 const token = jwt.sign({userid: userid}, conf.JWT_SECRET, {
                     expiresIn: conf.JWT_EXPIRES_IN
@@ -49,7 +49,7 @@ exports.singin = async (req, res) => {
                     httpOnly: false
                 }
                  res.cookie('jwt', token, cookieOption);
-                 res.status(200).send({ token: token });
+                 res.status(200).send({ token: token, user: user });
                
             }
         })

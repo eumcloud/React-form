@@ -16,7 +16,7 @@ const Login=({ handleChange })=>{
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     const { state, dispatch } = useContext(Context);
-    console.log(state);
+
     console.log("STATE is :"+ JSON.stringify(state));
 
     const initialValues = {
@@ -35,11 +35,12 @@ const Login=({ handleChange })=>{
         await axios.post(`http://localhost:3001/auth/signin`,  { email, userpwd } )
             .then(response => {   
                console.log("recieved token :" + JSON.stringify(response.data));
+               const data = JSON.parse(response.data.user)  // = token
                dispatch({ 
                    type: "LOGIN",
-                   payload: response.data
+                   payload: data
                 })
-                window.localStorage.setItem('user',  JSON.stringify(response.data));
+                window.localStorage.setItem('user',  state);
                 console.log("logged in success !!! // STATE is :"+ JSON.stringify(state));
             })
             .catch(error => {   //FIXME: error
