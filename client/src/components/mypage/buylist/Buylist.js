@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Template from "../Template";
 import Header from "../Header";
 import { CheckBox } from "@mui/icons-material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 // 리스트 컬럼 정리
 const THBlock = styled.div`
@@ -43,26 +45,40 @@ const ListStyled = styled.div`
   }
 `;
 
+
 const ListContents = styled.div`
   width: 90%;
   color: black;
-
+  
   display: flex;
-  justify-conents: space-between;
+  /* justify-conent: space-between; */
   margin: 15px auto;
   padding: 10px;
   font-size: 18px;
-
+  
   background: white;
   border-radius: 10px;
   border: solid lightgray 1px;
-
+  
   div {
     margin: auto 0;
     display: flex;
   }
-`;
+  `;
 export default function Lists() {
+  const [lists, setLists] = useState([{
+  }])
+  
+  const callApi = async() => {
+    const response = await axios.get("http://localhost:3001/mypage/buylist")
+    setLists([...lists,...response.data])
+  }
+
+  useEffect(() => {
+    callApi();
+  },[]);
+
+
   const pHeader = ["상품명", "이미지", "가격", "날짜"];
   const dt = new Date(); //will be change
   const products = [
@@ -74,30 +90,6 @@ export default function Lists() {
       price: 3300,
       date: dt.toLocaleDateString()
     },
-    {
-      id: 2,
-      title: "1234",
-      url: "/list2",
-      img: "https://placeimg.com/64/64/1",
-      price: 5500,
-      date: dt.toLocaleDateString()
-    },
-    {
-      id: 3,
-      title: "1234",
-      url: "/list3",
-      img: "https://placeimg.com/64/64/1",
-      price: 1200,
-      date: dt.toLocaleDateString()
-    },
-    {
-      id: 4,
-      title: "1234",
-      url: "/list4",
-      img: "https://placeimg.com/64/64/1",
-      price: 3300,
-      date: dt.toLocaleDateString()
-    }
   ];
   console.log(products);
   const title = "구매내역";
