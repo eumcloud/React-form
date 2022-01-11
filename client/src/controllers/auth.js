@@ -49,7 +49,7 @@ exports.singin = async (req, res) => {
                     httpOnly: false
                 }
                  res.cookie('jwt', token, cookieOption);
-                 res.status(200).send({ token: token, user: user });
+                 res.status(200).send({ token: token, user: results[0] });
                
             }
         })

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import {browserHistory} from 'react-router';
 import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -35,18 +34,20 @@ const Login=({ handleChange })=>{
         const {email, userpwd} = values;
         await axios.post(`http://localhost:3001/auth/signin`,  { email, userpwd } )
             .then(response => {   
-               console.log("recieved token :" + JSON.stringify(response.data));
-               const data = JSON.parse(response.data.user)  // = token
+                console.log("signin response data: " + response.data.user );
+                const {data} = response.data.user;
+                console.log("recieved token :" + data);
+               
                dispatch({ 
                    type: "LOGIN",
-                   payload: data
+                   payload: response.data.user
                 })
-                window.localStorage.setItem('user',  response.data.user);
+                window.localStorage.setItem('user',  JSON.stringify(response.data.user));
                 window.location.replace('/');
-                console.log("logged in success !!! // STATE is :"+ JSON.stringify(state));
+                console.log("logged in success !!! // STATE is :"+ JSON.stringify(response.data.user));
             })
             .catch(error => {   //FIXME: error
-                console.log(error.response.data)
+                console.log(error.response.data.user)
                 alert(error.response.data.error)
             })
             .setTimeout(() => {
