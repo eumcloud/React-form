@@ -35,7 +35,6 @@ connection.connect((err) => {
 });
 
 app.get('/', authController.isLoggedIn, (req, res) => {
-
   res.send({
     user: req.user
   });
@@ -53,6 +52,9 @@ app.get('/mypage', authController.isLoggedIn, (req, res) => {
   
 })
 
+// app.get("/auth/logout", authcontroller.logout, (req, res) => {
+
+// });
 
 
 app.get("/api/products", (req, res) => {

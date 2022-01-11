@@ -5,7 +5,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Login from '../../components/main/LoginGridItem';
-import Signup from '../../components/main/SignupGridItem'; 
+import Signup from '../../components/main/SignupGridItem';
+import Logout from '../../components/main/LogoutGridItem';
 import { Grid } from '@material-ui/core';
 
 const SignInOutContainer=()=>{
@@ -16,7 +17,7 @@ const SignInOutContainer=()=>{
     setValue(newValue);
   };
 
-  const paperStyle={width:340,margin:"100px auto"}
+  const paperStyle={width:510,margin:"100px auto"}
 
   function TabPanel(props) {
     
@@ -53,15 +54,18 @@ const SignInOutContainer=()=>{
           onChange={handleChange}
           aria-label="disabled tabs example"
         >
-          <Tab label="Log In" />
-         
+          <Tab label="Log In" />  
           <Tab label="Sign Up" />
+          <Tab label="Log out" />
         </Tabs>
         <TabPanel value={value} index={0}>
        <Login handleChange={handleChange}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
       <Signup/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+      <Logout/>
       </TabPanel>
       </Paper>
       </Grid>

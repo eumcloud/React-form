@@ -6,6 +6,7 @@ const fs = require("fs");
 const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data);
 
+
 const db = mysql.createConnection({
   host: conf.host,
   user: conf.user,
@@ -141,6 +142,13 @@ exports.isLoggedIn = async (req, res, next) => {
           expires: new Date(Date.now()+ 2*1000),   // 2 * 1000 밀리세컨드
           httpOnly: true
       });
-
-      res.status(200).redirect('/');
+      try {
+      res.clearCookie("token");
+      return res.json({ message: "sign out"}, ()=> {
+        window.location.replace('/');
+      });
+      
+      } catch (error) {
+          console.log(error);
+      }
   }

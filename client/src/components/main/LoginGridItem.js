@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true
 
 const Login=({ handleChange })=>{
   
-    const paperStyle={padding :20,height:'70vh',width:340, margin:"20px auto"}
+    const paperStyle={padding :20,height:'70vh',width:510, margin:"20px auto"}
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const btnstyle = { margin: '8px 0' }
     const { state, dispatch } = useContext(Context);
@@ -43,7 +43,7 @@ const Login=({ handleChange })=>{
                    payload: response.data.user
                 })
                 window.localStorage.setItem('user',  JSON.stringify(response.data.user));
-                // window.location.replace('/');
+                window.location.replace('/');
                 console.log("logged in success !!! // STATE is :"+ JSON.stringify(response.data.user));
             })
             .catch(error => {   //FIXME: error
