@@ -98,7 +98,7 @@ function BoardDetail() {
           <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
         </Box>
         <form onSubmit={onSubmit}>
-          <input name="bidx" type='hidden' value={bnum} />
+          <input name="bidx" type='hidden' />
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button  variant="contained" type="submit">글 삭제하기</Button>
           </Box>

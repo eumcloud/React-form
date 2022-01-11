@@ -7,6 +7,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Box } from '@mui/system';
+import Button from '@mui/material/Button';
 import { TextareaAutosize } from "@mui/material";
 
 
@@ -56,7 +58,22 @@ export default function CommentList({bnum}) {
       ccontent:'',
       board_idx:bnum
     });
+  }
 
+  const onDelete = e => {
+    e.preventDefault(); // submit 이벤트 발생시 refresh 방지
+    axios.delete("http://localhost:3001/api/comments",{
+      params: {
+        cidx: e.target.cidx.id
+      }
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+        console.log(error.response.data)
+        alert(error.response.data.error)
+    })
   }
 
   return (
@@ -72,6 +89,7 @@ export default function CommentList({bnum}) {
           <TableRow>
             <TableCell>userid</TableCell>
             <TableCell >content</TableCell>
+            <TableCell ></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -84,6 +102,14 @@ export default function CommentList({bnum}) {
               {row.cuserid}
               </TableCell>
               <TableCell >{row.ccontent}</TableCell>
+              <TableCell >
+              <form onSubmit={onDelete}>
+                <input name="cidx" id={row.cidx} type='hidden' />
+                <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+                  <Button  variant="contained" type="submit">댓글 삭제</Button>
+                </Box>
+              </form>
+        </TableCell>
             </TableRow>
           ))}
         </TableBody>
