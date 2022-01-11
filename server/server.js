@@ -5,6 +5,7 @@ const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const fs = require("fs")
 const auth = require("./routes/auth");
+const mypages = require("./routes/mypage/mypage");
 const port = 3001;
 const cors = require("cors");
 const authController = require('./controllers/auth');
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
+app.use("/mypage", mypages);
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
