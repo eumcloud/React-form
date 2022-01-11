@@ -35,7 +35,7 @@ const Login=({ handleChange })=>{
         await axios.post(`http://localhost:3001/auth/signin`,  { email, userpwd } )
             .then(response => {   
                 console.log("signin response data: " + response.data.user );
-                const {data} = response.data.user;
+                const {data} = JSON.stringify(response.data.user);
                 console.log("recieved token :" + data);
                
                dispatch({ 
@@ -43,7 +43,7 @@ const Login=({ handleChange })=>{
                    payload: response.data.user
                 })
                 window.localStorage.setItem('user',  JSON.stringify(response.data.user));
-                window.location.replace('/');
+                // window.location.replace('/');
                 console.log("logged in success !!! // STATE is :"+ JSON.stringify(response.data.user));
             })
             .catch(error => {   //FIXME: error
