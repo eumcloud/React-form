@@ -73,6 +73,7 @@ app.get("/api/boards", (req, res) => {
     )
 });
 
+
 app.put("/api/boards", (req,res) => {
   var bidx = req.body.bidx;
   var btitle = req.body.btitle;
@@ -91,9 +92,28 @@ app.delete("/api/boards", (req, res) => {
 })
 
 app.get("/api/comments", (req, res) => {
-  var idx = req.params.idx;
     connection.query(
-      `SELECT * FROM Comments where board_idx=${idx}`,
+      `SELECT * FROM Comments`,
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    )
+});
+
+app.put("/board/hit", (req,res) => {
+  var bidx = req.body.bidx;
+  let sQuery = `UPDATE Boards SET bhit=bhit+1 where bidx=${bidx}`;
+  connection.query(sQuery, (err, result, fields) => {
+    res.send(result)
+  })
+})
+
+app.post("/api/comments", (req, res) => {
+  var idx = req.body.board_idx;
+  var cuserid = req.body.cuserid;
+  var ccontent = req.body.ccontent;
+    connection.query(
+      `INSERT INTO Comments(cuserid, ccontent, board_idx) values('${cuserid}','${ccontent}','${idx}')`,
       (err, rows, fields) => {
         res.send(rows);
       }
