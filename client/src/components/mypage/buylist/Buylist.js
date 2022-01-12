@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import {useNavigate, useParams} from "react-router-dom"
 import axios from "axios"
 import styled from "styled-components";
 import Template from "../Template";
 import Header from "../Header";
 import { CheckBox } from "@mui/icons-material";
-import axios from "axios";
-import { useEffect, useState } from "react";
 // import Ax from "../../ax";
 
 // 리스트 컬럼 정리
@@ -110,11 +108,11 @@ export default function Lists() {
   const title = "구매내역";
 
   // let params = useParams();
-  const [state, refetch] = useAsync(callApi, [], true);
-  const {loading, data: resp, error} = state;
-  if(loading) return <div> 로딩중 ...</div>
-  if(error) return <div> 인증에러 ! </div>
-  if(!resp) return <button onClick={refetch}>새로고침</button>;
+  // const [state, refetch] = useAsync(callApi, [], true);
+  // const {loading, data: resp, error} = state;
+  // if(loading) return <div> 로딩중 ...</div>
+  // if(error) return <div> 인증에러 ! </div>
+  // if(!resp) return <button onClick={refetch}>새로고침</button>;
 
   useEffect(()=>{
     callApi();
