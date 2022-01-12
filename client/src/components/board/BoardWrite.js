@@ -8,8 +8,13 @@ import Button from '@mui/material/Button';
 
 function BoardWrite() {
   let navigate = useNavigate(); 
+
+  const cookie = window.localStorage.getItem("user")
+  const loginId = JSON.parse(cookie).userid
+  console.log(loginId)
+  
   const [inputData, setInputData] = useState({
-    buserid : '로그인 id',
+    buserid : loginId,
     btitle : '',
     bcontent : ''
   });

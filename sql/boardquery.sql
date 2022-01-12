@@ -32,3 +32,5 @@ INSERT INTO Comments(cuserid, ccontent, board_idx ) values ('a', 'b', 1);
 
 select * from Comments;
 -- drop table Comments;
+
+select * from users;
