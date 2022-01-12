@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -15,19 +16,31 @@ import { TextareaAutosize } from "@mui/material";
 
 
 export default function CommentList({bnum}) {
-  const [commentData, setCommentData] = useState([])
-  const callApi = async() => {
-    const response = await axios.get("http://localhost:3001/api/comments")
-    setCommentData(response.data.filter(comment => comment.board_idx === bnum))
-  }
+  const navigate = useNavigate();
+
+  const cookie = window.localStorage.getItem("user")
+  const loginId = JSON.parse(cookie).userid
+  console.log(loginId)
+
+  const [commentData, setCommentData] = useState([{
+    cidx:0,
+    cuserid:'',
+    ccontent:'',
+    board_idx:0
+  }])
   
   useEffect(() => {
-    callApi();
-  }, [commentData]);
+    const callApi = async() => {
+      const response = await axios.get("http://localhost:3001/api/comments")
+      const comments = response.data.filter(comment => comment.board_idx === bnum)
+      setCommentData(comments)
+    }
+    callApi()
+  }, []);
 
 
   const [cinput,setCinput] = useState({
-    cuserid:'로그인id',
+    cuserid:loginId,
     ccontent:'',
     board_idx: bnum
   })
@@ -54,10 +67,11 @@ export default function CommentList({bnum}) {
         alert(error.response.data.error)
     })
     setCinput({
-      cuserid:'로그인id',
+      cuserid:loginId,
       ccontent:'',
       board_idx:bnum
     });
+    navigate(0);
   }
 
   const onDelete = e => {
@@ -74,13 +88,14 @@ export default function CommentList({bnum}) {
         console.log(error.response.data)
         alert(error.response.data.error)
     })
+    navigate(0);
   }
 
   return (
     <>
     <form onSubmit={onSubmit}>
       <input type="hidden" name="cuserid" value={cinput.cuserid} />
-      <input name="ccontent" value={cinput.ccontent} onChange={onChange}/>
+      <TextareaAutosize name="ccontent" value={cinput.ccontent} style={{resize : "none"}} onChange={onChange} />
       <button type="submit">댓글 작성</button>
     </form>
     <TableContainer >
@@ -103,12 +118,21 @@ export default function CommentList({bnum}) {
               </TableCell>
               <TableCell >{row.ccontent}</TableCell>
               <TableCell >
-              <form onSubmit={onDelete}>
-                <input name="cidx" id={row.cidx} type='hidden' />
-                <Box sx={{ display: 'flex', justifyContent: 'right' }}>
-                  <Button  variant="contained" type="submit">댓글 삭제</Button>
-                </Box>
-              </form>
+                {
+                  row.cuserid == loginId
+                  ? (
+                    <>
+                      <form onSubmit={onDelete}>
+                        <input name="cidx" id={row.cidx} type='hidden' />
+                        <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+                          <Button  variant="contained" type="submit">댓글 삭제</Button>
+                        </Box>
+                      </form>
+                    </>
+                  )
+                  :null
+                }
+              
         </TableCell>
             </TableRow>
           ))}

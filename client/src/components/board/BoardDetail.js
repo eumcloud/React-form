@@ -13,6 +13,10 @@ function BoardDetail() {
   const bnum = parseInt(params.detail)
   let navigate = useNavigate();
 
+  const cookie = window.localStorage.getItem("user")
+  const loginId = JSON.parse(cookie).userid
+  console.log(loginId)
+
   const [inputData, setInputData] = useState({
     bidx:'',
     buserid:'',
@@ -93,16 +97,24 @@ function BoardDetail() {
             </tr>
           </tbody>
         </table>
-        {/* 로그인된 id와 일치할 경우 */}
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
-        </Box>
-        <form onSubmit={onSubmit}>
-          <input name="bidx" type='hidden' />
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Button  variant="contained" type="submit">글 삭제하기</Button>
-          </Box>
-        </form>
+        {
+          inputData.buserid == loginId
+          ? (
+            <>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
+            </Box>
+            <form onSubmit={onSubmit}>
+            <input name="bidx" type='hidden' />
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Button  variant="contained" type="submit">글 삭제하기</Button>
+            </Box>
+          </form>
+          </>
+          ) 
+          : null
+        }
+       
         <CommentList bnum={bnum}/>
     </>
   )

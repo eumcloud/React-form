@@ -8,9 +8,7 @@ const auth = require("./routes/auth");
 const port = 3001;
 const cors = require("cors");
 const authController = require('./controllers/auth');
-// require("./service/passport");
-// require('./routes/authRoutes')(app);
-// app.use(passport.initialize());
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

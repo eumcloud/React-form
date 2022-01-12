@@ -17,7 +17,7 @@ const Login=({ handleChange })=>{
     const btnstyle = { margin: '8px 0' }
     const { state, dispatch } = useContext(Context);
 
-    console.log("STATE is :"+ JSON.stringify(state));
+    console.log("STATE is :"+ state);
 
     const initialValues = {
         email: '',
@@ -31,6 +31,7 @@ const Login=({ handleChange })=>{
     })
     
     const onSubmit = async (values, props) => {
+
         const {email, userpwd} = values;
         props.setSubmitting(true);
       
@@ -41,9 +42,8 @@ const Login=({ handleChange })=>{
                    type: "LOGIN",
                    payload: user
                 })
-                window.localStorage.setItem('user',  JSON.stringify(response.data.user));
-                // window.location.replace('/');
-                console.log("logged in success !!! // STATE is :"+ JSON.stringify(response.data.user));
+                window.localStorage.setItem('user',  response.data.user);
+                window.location.replace('/');
             })
             .catch(error => {   //FIXME: error
                 console.log(error.response.data.user)
@@ -53,7 +53,6 @@ const Login=({ handleChange })=>{
                 props.resetForm()
                 props.setSubmitting(false)
             }, 2000)
-        
     }
     return (
         <Grid>
@@ -83,7 +82,6 @@ const Login=({ handleChange })=>{
                             />
                             <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
                                 style={btnstyle} fullWidth>{props.isSubmitting ? "Loading" : "Log in"}</Button>
-
                         </Form>
                     )}
                 </Formik>

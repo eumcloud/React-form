@@ -38,6 +38,8 @@ exports.singin = async (req, res) => {
             } else {
                
                 const userid = results[0].userid
+                const user = results[0]
+                console.log("userid : "+JSON.stringify(results[0]));
                 const token = jwt.sign({userid: userid}, conf.JWT_SECRET, {
                     expiresIn: conf.JWT_EXPIRES_IN
                 });
@@ -50,7 +52,7 @@ exports.singin = async (req, res) => {
                     httpOnly: false
                 }
                  res.cookie('jwt', token, cookieOption);
-                 res.status(200).send({ token: token, user: results[0] });
+                 res.status(200).send({ token: token, user: user});
                
             }
         })
