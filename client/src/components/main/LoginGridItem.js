@@ -17,7 +17,7 @@ const Login=({ handleChange })=>{
     const btnstyle = { margin: '8px 0' }
     const { state, dispatch } = useContext(Context);
 
-    console.log("STATE is :"+ state);
+    console.log("STATE is :", state);
 
     const initialValues = {
         email: '',
@@ -34,16 +34,17 @@ const Login=({ handleChange })=>{
 
         const {email, userpwd} = values;
         props.setSubmitting(true);
-      
         await axios.post(`http://localhost:3001/auth/signin`,  { email, userpwd } )
             .then(response => {   
                const {user} = response.data;
+               const  userState = JSON.stringify(user);
+               console.log("reponse.data: ", user);
                dispatch({ 
                    type: "LOGIN",
                    payload: user
                 })
-                window.localStorage.setItem('user',  response.data.user);
-                window.location.replace('/');
+                window.localStorage.setItem('user',  userState);
+                // window.location.replace('/');
             })
             .catch(error => {   //FIXME: error
                 console.log(error.response.data.user)

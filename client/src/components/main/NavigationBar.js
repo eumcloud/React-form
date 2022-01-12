@@ -17,7 +17,6 @@ import {
 import MypageNavItem from './MypageNavItem';
 
 const useStyles = makeStyles((theme) => ({
-  
   siteTitle: {
     fontWeight: 'bold',
     letterSpacing: 1.5,
@@ -62,9 +61,9 @@ export default function NavigationBar() {
     toggleMenuOpen: false,
     isLoggedIn: false
   });
-  
+
   const { toggleMenu, toggleMenuOpen, isLoggedIn } = state;
-  
+
   useEffect(() => {
     
     const setResponsiveness = () => {
@@ -72,7 +71,7 @@ export default function NavigationBar() {
       return window.innerWidth < 960
         ? setState((prevState) => ({ ...prevState, toggleMenu: true  }))
         : setState((prevState) => ({ ...prevState, toggleMenu: false }));
-      
+  
     };
     
     setResponsiveness();
@@ -137,8 +136,7 @@ export default function NavigationBar() {
     setValue(newValue);
   };
   
-
-  const displayLargeMenu = (props) => {
+  const displayLargeMenu = () => {
     
     // const { children, value, index, ...other } = props;
     return(
@@ -162,9 +160,8 @@ export default function NavigationBar() {
               <Tab label="Product"component={Link} to={"/product"} />
               <Tab label="Board" component={Link} to={"board/page/1"} />
               {isLoggedIn ? <MypageNavItem /> : <Tab label="Signup"  component={Link} to={"/signup"} index={0} value={value} onclick={(event) => handleClick(event, 0)}/> }
-              <Tab label="Logout" component={Link} to={"/logout"} index={1} value={value} onclick={(event) => handleClick(event, 1)}/>
+              <Tab label="Logout" component={Link} to={"/logout"} index={1} value={value} onClick={(event) => handleClick(event, 1)}/>
               <Tab label="/Mypage"component={Link} to={"/mypage"} />
-              
             </Tabs>
 
         </Box>
