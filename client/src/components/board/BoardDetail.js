@@ -27,7 +27,7 @@ function BoardDetail() {
   });
 
   const callApi = async() => {
-    const response = await axios.get("http://localhost:3001/api/boards")
+    const response = await axios.get("http://localhost:3001/board")
     const datas = response.data.filter(obj => obj.bidx === bnum)
     setInputData(datas[0])
   }
@@ -52,7 +52,7 @@ function BoardDetail() {
 
   const onSubmit = (e) => {
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-    axios.delete("http://localhost:3001/api/boards",{
+    axios.delete("http://localhost:3001/board",{
       params: {
         bidx: bnum
       }

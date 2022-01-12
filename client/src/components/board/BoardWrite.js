@@ -31,7 +31,7 @@ function BoardWrite() {
     
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
     console.log({inputData})
-    axios.post("http://localhost:3001/board/write",inputData)
+    axios.post("http://localhost:3001/board",inputData)
     .then(response => {
       console.log(response);
     })

@@ -31,7 +31,7 @@ function BoardUpdate() {
   const onSubmit = (e) => {
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
     console.log("a")
-    axios.put("http://localhost:3001/api/boards",inputData)
+    axios.put("http://localhost:3001/board",inputData)
     .then(response => {
       console.log(response);
     })

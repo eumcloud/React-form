@@ -31,7 +31,7 @@ export default function CommentList({bnum}) {
   
   useEffect(() => {
     const callApi = async() => {
-      const response = await axios.get("http://localhost:3001/api/comments")
+      const response = await axios.get("http://localhost:3001/board/comment")
       const comments = response.data.filter(comment => comment.board_idx === bnum)
       setCommentData(comments)
     }
@@ -58,7 +58,7 @@ export default function CommentList({bnum}) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/api/comments",cinput)
+    axios.post("http://localhost:3001/board/comment",cinput)
     .then(response => {
       console.log(response);
     })
@@ -76,7 +76,7 @@ export default function CommentList({bnum}) {
 
   const onDelete = e => {
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-    axios.delete("http://localhost:3001/api/comments",{
+    axios.delete("http://localhost:3001/board/comment",{
       params: {
         cidx: e.target.cidx.id
       }

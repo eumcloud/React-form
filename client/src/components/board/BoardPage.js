@@ -22,7 +22,7 @@ export default function BoardPage() {
   const [inputData, setInputData] = useState([])
 
   const callApi = async() => {
-    const response = await axios.get("http://localhost:3001/api/boards")
+    const response = await axios.get("http://localhost:3001/board")
     setInputData([...inputData,...response.data])
   }
   
@@ -51,6 +51,7 @@ export default function BoardPage() {
 
  const onClick = (e) => {
   const idx = e.target.id
+  console.log(idx)
   axios.put("http://localhost:3001/board/hit",{bidx:idx})
     .then(response => {
       console.log(response);
@@ -88,7 +89,7 @@ export default function BoardPage() {
               <TableCell component="th" scope="row">
                 {row.buserid}
               </TableCell>
-              <TableCell align="right" id={row.bidx} onClick={onClick} >{row.btitle}</TableCell>
+              <TableCell align="right"  ><h3 style={{cursor:"pointer"}} id={row.bidx} onClick={onClick}>{row.btitle}</h3></TableCell>
               <TableCell align="right">{row.bhit}</TableCell>
               <TableCell align="right">{row.regdate}</TableCell>
             </TableRow>
