@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
-app.use("/mypage", mypages);
+app.use("/mypage",/* authController.isLoggedIn, */ mypages); //개발 작업중이므로 필수인증 임시대기
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
@@ -43,17 +43,17 @@ app.get('/', authController.isLoggedIn, (req, res) => {
   });
 });
 
-app.get('/mypage', authController.isLoggedIn, (req, res) => {
-  console.log(req.user);
-  if( req.user ) {
-    res.send({
-      user: req.user
-    });
-  } else {
-    res.redirect('/login');
-  }
+// app.get('/mypage', authController.isLoggedIn, (req, res) => {
+//   console.log(req.user);
+//   if( req.user ) {
+//     res.send({
+//       user: req.user
+//     });
+//   } else {
+//     res.redirect('/login');
+//   }
   
-})
+// })
 
 
 
