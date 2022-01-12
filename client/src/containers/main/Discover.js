@@ -4,7 +4,6 @@ import DiscoverGridItem from '../../components/main/DiscoverGridItem';
 import GridItem from '../../components/main/GridItem';
 import Mando from '../../static/img/madal.jpg';
 
-
 export default function Discover() {
     
   return (
@@ -29,8 +28,6 @@ export default function Discover() {
           description=""
         />
       </Grid>
-    
-    
     </Grid>
   );
 }

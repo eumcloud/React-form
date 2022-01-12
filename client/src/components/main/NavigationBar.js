@@ -60,10 +60,10 @@ export default function NavigationBar() {
   const [state, setState] = useState({
     toggleMenu: false,
     toggleMenuOpen: false,
-    isLoggedin: false
+    isLoggedIn: false
   });
   
-  const { toggleMenu, toggleMenuOpen, isLoggedin } = state;
+  const { toggleMenu, toggleMenuOpen, isLoggedIn } = state;
   
   useEffect(() => {
     
@@ -81,8 +81,6 @@ export default function NavigationBar() {
     
   }, []);
 
-
-  
   const classes = useStyles();
   
   const displayToggleMenu = () => {
@@ -92,7 +90,6 @@ export default function NavigationBar() {
     
       return(
         <Toolbar>
-
           <IconButton
             {...{onClick: handleToggleMenuOpen}}
           >
@@ -106,16 +103,11 @@ export default function NavigationBar() {
               onClose: handleToggleMenuClose
             }}
           >
-
             <div>
               {getToggleMenuOptions()}
             </div>
-
-
           </Drawer>
-
         </Toolbar>
-
       )
   }
 
@@ -123,7 +115,7 @@ export default function NavigationBar() {
     return (
 
       <Box>
-      {[{menu:'roadmap', url:"/"}, {menu:'product', url:"/product"}, {menu:'board', url:"board/page/1"}, {menu:'sign up', url:"/signup"}, {menu:'/mypage', url:"/mypage"}].map((menuOption) => (
+      {[{menu:'roadmap', url:"/"}, {menu:'product', url:"/product"}, {menu:'board', url:"board/page/1"}, {menu:'sign up', url:"/signup"},{menu:'log out', url:"/logout"}, {menu:'/mypage', url:"/mypage"}].map((menuOption) => (
   
         <MenuItem component={Link} to={menuOption.url}> 
 
@@ -138,10 +130,17 @@ export default function NavigationBar() {
     )
   }
 
+
+  const [value,setValue]=useState(0)
+
+  const handleClick = (event, newValue) => {
+    setValue(newValue);
+  };
   
 
-  const displayLargeMenu = () => {
+  const displayLargeMenu = (props) => {
     
+    // const { children, value, index, ...other } = props;
     return(
     <>
     <Toolbar className={classes.toolbar}>
@@ -162,7 +161,8 @@ export default function NavigationBar() {
               <Tab label="Roadmap" component={Link} to={"/"} />
               <Tab label="Product"component={Link} to={"/product"} />
               <Tab label="Board" component={Link} to={"board/page/1"} />
-              {isLoggedin ? <MypageNavItem /> : <Tab label="Signup"  component={Link} to={"/signup"} /> }
+              {isLoggedIn ? <MypageNavItem /> : <Tab label="Signup"  component={Link} to={"/signup"} index={0} value={value} onclick={(event) => handleClick(event, 0)}/> }
+              <Tab label="Logout" component={Link} to={"/logout"} index={1} value={value} onclick={(event) => handleClick(event, 1)}/>
               <Tab label="/Mypage"component={Link} to={"/mypage"} />
               
             </Tabs>
