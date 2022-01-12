@@ -1,18 +1,22 @@
-import React, {Component} from "react";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import {useNavigate} from "react-router-dom"
 
-class HeadProduct extends Component {
-    render() {
+function HeadProduct(props){
+    let navigate = useNavigate();
+    const onClick = (e) => {        
+        const idx = e.target.id
+        navigate(`/product/productdetail/${idx}`)
+       }
         return (
             <TableRow>
-                <TableCell>{this.props.id}</TableCell>
-                <TableCell><img src ={this.props.image} alt="Profile"/></TableCell>
-                <TableCell>{this.props.product}</TableCell>
-                <TableCell>{this.props.price}</TableCell>
+                <TableCell onClick={onClick}>{props.id}</TableCell>
+                <TableCell onClick={onClick}><img src ={props.image} alt="Profile"/></TableCell>
+                <TableCell onClick={onClick}>{props.product}</TableCell>
+                <TableCell onClick={onClick}>{props.price}</TableCell>
             </TableRow>
         )
-    }
+
 } 
 
 

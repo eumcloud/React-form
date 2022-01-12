@@ -7,6 +7,7 @@ import Gallery from "./containers/main/Gallery";
 import Signup from "./containers/main/Signup";
 import NoPage from "./components/Nopage";
 import Product from "./containers/product/Product"
+import ProductDetail from "./containers/product/ProductDetail"
 import Mypage from  "./containers/mypage/MypageContainer"
 import BoardLayout from "./components/board/BoardLayout";
 import BoardPage from "./components/board/BoardPage";
@@ -42,11 +43,11 @@ const Router = () => {
           <Route exact path="detail/:detail" element={<BoardDetail />} />
         </Route>
 
-        <Route path="/product" element={<Product />}>
+        <Route path="/product" element={<Product />} />
           <Route exact path="list" element={<Product />} />
-          <Route exact path="detail" /*element={}*/ />
-          <Route exact path="payment" /*element={}*/ />
-        </Route>
+          <Route exact path="productdetail" element={<ProductDetail/>} />
+          <Route exact path="product/:productdetail" element={<ProductDetail />} />
+      
           <Route path="/mypage" element={<Mypage />} /> 
           <Route path="/mypage/buylist" element={<Buylist />} />
           <Route exact path="/mypage/cart" element={<CartLst />} />

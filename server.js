@@ -19,11 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
 
-// app.use(cookieSession({
-//   name: 'test-session',
-//   keys: ['key1', 'key2']
-// }))
-
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
 const connection = mysql.createConnection({
@@ -40,6 +35,7 @@ connection.connect((err) => {
 });
 
 app.get('/', authController.isLoggedIn, (req, res) => {
+
   res.send({
     user: req.user
   });
@@ -68,6 +64,7 @@ app.get("/api/products", (req, res) => {
     )
 });
 
+
 app.get("/api/boards", (req, res) => {
     connection.query(
       "SELECT * FROM Boards",
@@ -76,6 +73,18 @@ app.get("/api/boards", (req, res) => {
       }
     )
 });
+
+app.post("/board/write", (req, res)=>{
+  var buserid = req.body.buserid;
+  var btitle = req.body.btitle;
+  var bcontent = req.body.bcontent;
+  var datas = [buserid, btitle, bcontent];
+    let sQuery = "insert into Boards(buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser) values(?,?,?,now(),now(),0,0)";  // ? 는 매개변수
+        connection.query(sQuery, datas,(err, result, fields) => {
+          res.send(result)
+        });
+})
+
 
 app.put("/api/boards", (req,res) => {
   var bidx = req.body.bidx;
@@ -94,25 +103,42 @@ app.delete("/api/boards", (req, res) => {
   )
 })
 
+app.put("/board/hit", (req,res) => {
+  var bidx = req.body.bidx;
+  let sQuery = `UPDATE Boards SET bhit=bhit+1 where bidx=${bidx}`;
+  connection.query(sQuery, (err, result, fields) => {
+    res.send(result)
+  })
+})
+
+
 app.get("/api/comments", (req, res) => {
-  var idx = req.params.idx;
+  connection.query(
+    `SELECT * FROM Comments`,
+    (err, rows, fields) => {
+      res.send(rows);
+    }
+  )
+});
+
+app.post("/api/comments", (req, res) => {
+  var idx = req.body.board_idx;
+  var cuserid = req.body.cuserid;
+  var ccontent = req.body.ccontent;
     connection.query(
-      `SELECT * FROM Comments where board_idx=${idx}`,
+      `INSERT INTO Comments(cuserid, ccontent, board_idx) values('${cuserid}','${ccontent}','${idx}')`,
       (err, rows, fields) => {
         res.send(rows);
       }
     )
 });
 
-app.post("/board/write", (req, res)=>{
-  var buserid = req.body.buserid;
-  var btitle = req.body.btitle;
-  var bcontent = req.body.bcontent;
-  var datas = [buserid, btitle, bcontent];
-    let sQuery = "insert into Boards(buserid, btitle, bcontent, regdate, modidate, bhit, blikeuser) values(?,?,?,now(),now(),0,0)";  // ? 는 매개변수
-        connection.query(sQuery, datas,(err, result, fields) => {
-          res.send(result)
-        });
+app.delete("/api/comments", (req, res) => {
+  var cidx = parseInt(req.query.cidx);
+  console.log(cidx)
+  connection.query(
+    `DELETE from Comments where cidx=${cidx}`
+  )
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

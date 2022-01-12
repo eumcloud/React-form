@@ -28,7 +28,7 @@ create table Comments (
     on update cascade on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO Comments(cuserid, ccontent ) values ('a', 'b');
+INSERT INTO Comments(cuserid, ccontent, board_idx ) values ('a', 'b', 1);
 
 select * from Comments;
 -- drop table Comments;

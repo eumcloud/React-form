@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import HeadProduct from "./HeadProduct";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -6,50 +5,43 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import {useState, useEffect} from "react";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 
-const styles = theme => ({
+const useStyles = makeStyles({
   root: {
     width: "100%",
-    margintop: theme.spacing.unit * 3,
     overflowX: "auto"
   },
   table: {
     minWidth: 1080
   },
   progress: {
-    margin: theme.spacing.unit * 2
+    margin: 10,
   },
 });
 
-class Product extends Component {
+    function Product() {
+    const classes = useStyles();
+    const [products, setProducts] = useState([]);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: "",
-      completed: 0
-    }
+    const callApi = async() => {
+    const response = await axios.get("http://localhost:3001/api/products")
+    setProducts([...products,...response.data])
   }
 
-  componentDidMount() {
-    this.callApi()
-    .then(res => this.setState({products: res}))
-    .catch(err => console.log(err));
-  }
+    useEffect(() => {
+    callApi();
+    },[]);
 
-  callApi = async() => {
-	const Nodehost = "http://localhost:3001"// || "https://nodejs00001.run.goorm.io/" ; //3001포트 테스트중
-    const response = await fetch(Nodehost+"/api/products");
-    const body = await response.json();
-    return body;
-  }
+    
 
-  render() {
-    const { classes } = this.props;
-  return (
+
+  
+    return (
     <Paper className= {classes.root}>
       <Table className= {classes.table}>
         <TableHead>
@@ -60,19 +52,27 @@ class Product extends Component {
           <TableCell>가격</TableCell>
           </TableRow>
         </TableHead>
-      <TableBody>
-        {this.state.products ? this.state.products.map(b => { 
-          return ( <HeadProduct key={b.id} id={b.id} image={b.image} product={b.product} price={b.price} /> ) 
-          }) : 
+      <TableBody> 
+          {products!=0 ? products.map((c) => {
+          return (   
+            <HeadProduct 
+            key={c.id}
+            id={c.id}
+            image={c.image}
+            product={c.product}
+            price={c.price}
+            />
+          );
+        }) :
           <TableRow>
             <TableCell colSpan="6" align="center">
             </TableCell>
           </TableRow>
-          } 
+        }
       </TableBody>
       </Table> 
     </Paper>
   );
 }
-}
-export default withStyles(styles)(Product);
+
+export default Product;
