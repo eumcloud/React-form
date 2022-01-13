@@ -18,9 +18,11 @@ import { TextareaAutosize } from "@mui/material";
 export default function CommentList({bnum}) {
   const navigate = useNavigate();
 
+  let loginId = '';
   const cookie = window.localStorage.getItem("user")
-  const loginId = JSON.parse(cookie).userid
-  console.log(loginId)
+  if(cookie){
+    loginId = JSON.parse(cookie).userid
+  }
 
   const [commentData, setCommentData] = useState([{
     cidx:0,
@@ -93,11 +95,16 @@ export default function CommentList({bnum}) {
 
   return (
     <>
-    <form onSubmit={onSubmit}>
+    <br/>
+    <br/>
+    {
+      loginId &&
+      <form onSubmit={onSubmit}>
       <input type="hidden" name="cuserid" value={cinput.cuserid} />
       <TextareaAutosize name="ccontent" value={cinput.ccontent} style={{resize : "none"}} onChange={onChange} />
       <button type="submit">댓글 작성</button>
     </form>
+    }
     <TableContainer >
       <Table sx={{ maxWidth: 650 }} aria-label="simple table">
         <TableHead>

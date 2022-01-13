@@ -4,6 +4,13 @@ import {useNavigate} from "react-router-dom"
 import { Box } from '@mui/system';
 import { TextareaAutosize } from "@mui/material";
 import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 
 function BoardWrite() {
@@ -49,37 +56,37 @@ function BoardWrite() {
     
   }
 
-  const style= {border: "none", background: "transparent" , resize : "none"}
+  const style= {border: "none", background: "transparent" , resize : "none", width : "100%"}
 
   return (
     <>
       <h1>글 작성하기</h1>
       <form onSubmit={onSubmit}>
-        <table border="1">
-          <tbody>
-            <tr>
-              <td>작성자</td>
-              <td><input name="buserid" value={inputData.buserid} readOnly/></td>
-            </tr>
-            <tr>
-              <td>제목</td>
-              <td><input name="btitle" value={inputData.btitle} style={style} onChange={onChange}/></td>
-            </tr>
-            <tr>
-              <td>내용</td>
-              <td>
-                <TextareaAutosize 
+        <TableContainer sx={{ maxWidth: 650 }} component={Paper}>
+      <Table aria-label="simple table">
+        <TableBody>
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+              <TableCell align="center">작성자</TableCell>
+              <TableCell><input name="buserid" value={inputData.buserid} style={style} readOnly/></TableCell>
+            </TableRow>
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+              <TableCell align="center">제목</TableCell>
+              <TableCell><input name="btitle" value={inputData.btitle} style={style} onChange={onChange} required="required"/></TableCell>
+            </TableRow>
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 , lineHeight:20 } }} >
+              <TableCell align="center">내용</TableCell>
+              <TableCell><TextareaAutosize 
                   value={inputData.bcontent}
                   style={style}
                   name='bcontent'
                   onChange={onChange}
                   placeholder="content please"
                   required="required"
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                /></TableCell>
+            </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button  variant="contained" type="submit">글 저장하기</Button>
         </Box>
