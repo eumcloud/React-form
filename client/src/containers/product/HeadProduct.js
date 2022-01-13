@@ -4,16 +4,17 @@ import {useNavigate} from "react-router-dom"
 
 function HeadProduct(props){
     let navigate = useNavigate();
-    const onClick = (e) => {        
-        const idx = e.target.id
+    const onClick = (e) => {  
+        e.preventDefault();       
+        const idx = props.id
         navigate(`/product/productdetail/${idx}`)
        }
         return (
-            <TableRow>
-                <TableCell onClick={onClick}>{props.id}</TableCell>
-                <TableCell onClick={onClick}><img src ={props.image} alt="Profile"/></TableCell>
-                <TableCell onClick={onClick}>{props.product}</TableCell>
-                <TableCell onClick={onClick}>{props.price}</TableCell>
+            <TableRow onClick={onClick}>
+                <TableCell>{props.id}</TableCell>
+                <TableCell><img src ={props.image} alt="Profile"/></TableCell>
+                <TableCell>{props.product}</TableCell>
+                <TableCell>{props.price}</TableCell>
             </TableRow>
         )
 
