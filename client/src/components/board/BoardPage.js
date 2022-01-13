@@ -11,9 +11,6 @@ import TableRow from '@mui/material/TableRow';
 import './Paging.css'; 
 import Pagination from "react-js-pagination";
 
-
-
-
 export default function BoardPage() {
   let navigate = useNavigate(); 
   

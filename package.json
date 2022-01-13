@@ -3,37 +3,32 @@
     "version": "1.0.0",
     "scripts": {
         "client": "cd client && yarn start",
-        "server": "nodemon server.js",
+        "server": "cd server && nodemon server.js",
         "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
     },
     "dependencies": {
-        "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
         "@material-ui/icons": "^4.11.2",
-        "@mui/icons-material": "^5.2.5",
-        "@mui/lab": "^5.0.0-alpha.64",
-        "@mui/material": "^5.2.8",
+        
+        "@mui/lab": "^5.0.0-alpha.63",
+        "@mui/material": "^5.2.7",
         "axios": "^0.24.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.1",
         "cookie-parser": "^1.4.6",
-        "cookie-session": "^2.0.0",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",
         "express": "^4.17.2",
-        "express-openid-connect": "^2.5.2",
         "formik": "^2.2.9",
         "fs": "^0.0.1-security",
-        "http-proxy-middleware": "^2.0.1",
         "jsonwebtoken": "^8.5.1",
         "multer": "^1.4.4",
         "mysql": "^2.18.1",
         "nodemon": "^2.0.15",
-        "passport": "^0.5.2",
-        "passport-google-oauth20": "^2.0.0",
-        "react-router": "^6.2.1",
+        "react-redux": "^7.2.6",
         "react-router-dom": "^6.2.1",
-        "universal-cookie": "^4.0.4"
+        "redux": "^4.1.2",
+        "redux-devtools-extension": "^2.13.9"
     },
     "devDependencies": {
         "concurrently": "^7.0.0"

@@ -161,7 +161,7 @@ export default function NavigationBar() {
             <Tabs className={classes.tabsContainer}>
               <Tab label="Roadmap" component={Link} to={"/"} />
               <Tab label="Product"component={Link} to={"/product"} />
-              <Tab label="Board" component={Link} to={"board/page/1"} />
+              <Tab label="Board" component={Link} to={"/board/page/1"} />
               {isLoggedin ? <MypageNavItem /> : <Tab label="Signup"  component={Link} to={"/signup"} /> }
               <Tab label="/Mypage"component={Link} to={"/mypage"} />
               

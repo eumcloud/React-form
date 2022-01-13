@@ -4,10 +4,11 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const cookieParser = require("cookie-parser");
 const fs = require("fs")
-const auth = require("./client/src/routes/auth");
+const auth = require("./routes/auth");
+const mypages = require("./routes/mypage/mypage");
 const port = 3001;
 const cors = require("cors");
-const authController = require('./client/src/controllers/auth');
+const authController = require('./controllers/auth');
 // require("./service/passport");
 // require('./routes/authRoutes')(app);
 // app.use(passport.initialize());
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
+app.use("/mypage",/* authController.isLoggedIn, */ mypages); //개발 작업중이므로 필수인증 임시대기
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
@@ -41,17 +43,17 @@ app.get('/', authController.isLoggedIn, (req, res) => {
   });
 });
 
-app.get('/mypage', authController.isLoggedIn, (req, res) => {
-  console.log(req.user);
-  if( req.user ) {
-    res.send({
-      user: req.user
-    });
-  } else {
-    res.redirect('/login');
-  }
+// app.get('/mypage', authController.isLoggedIn, (req, res) => {
+//   console.log(req.user);
+//   if( req.user ) {
+//     res.send({
+//       user: req.user
+//     });
+//   } else {
+//     res.redirect('/login');
+//   }
   
-})
+// })
 
 
 
