@@ -70,11 +70,11 @@ const ListContents = styled.div`
   `;
 
 
+// const callApi = async() => {
+//   const response = await axios.get("http://localhost:3001/api/mypage/buylist/")
+//   return response.data;
+// }
 
-const callApi = async() => {
-  const response = await axios.get("http://localhost:3001/api/mypage/buylist/")
-  return response.data;
-}
 export default function Lists() {
   const urlpath = "http://localhost:3001/mypage/buylist"
   // const resp = await axios.get(urlpath)

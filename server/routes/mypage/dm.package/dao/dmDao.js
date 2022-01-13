@@ -1,25 +1,25 @@
-// const db = require("./db");
-const db = require("mysql");
-require("dotenv").config();
+const db = require("./db");
+// const db = require("mysql");
+// require("dotenv").config();
 
-const configs = {
-   database: "testDB",
-   host: "54.180.127.20",
-   port: "3306",
-   user: "test",
-   password: "1234"
-}
-const pool = db.createPool(configs)
+// const configs = {
+//    database: "testDB",
+//    host: "54.180.127.20",
+//    port: "3306",
+//    user: "test",
+//    password: "1234"
+// }
+// const pool = db.createPool(configs)
 
-const getConn = function (callback){
-   pool.getConnection((err, conn)=>{
-   if(err) throw err;
-   console.log("Conn for Cart func..");
-   callback(conn)
-})
-}
+// const getConn = function (callback){
+//    pool.getConnection((err, conn)=>{
+//    if(err) throw err;
+//    console.log("Conn for Cart func..");
+//    callback(conn)
+// })
+// }
 
-exports.getDMlist = function getCartlists(id){
+exports.getDMlist = function getDMlist(id){
     let resp;
    getConn((conn)=>{
        let sQuery = `Select * from DirectBoard`;
@@ -57,11 +57,11 @@ exports.modifyDM = (dm, userid)=>{
    }) 
     return resp;
 }
-DELETE FROM CORPDATA.EMPLOYEE
-     WHERE WORKDEPT = 'D11'
+
+     
 exports.deleteItem = (dno, userid)=>{
-    let resp;
-   let sQuery = `Delete from DirectBoard where no=${dm.no}`;
+   let resp;
+   let sQuery = `Delete from DirectBoard where no=${dm.dno}`;
    getConn((conn)=>{
        conn.query(sQuery, (err, result)=>{
            console.log(result);

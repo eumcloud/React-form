@@ -47,7 +47,7 @@ const Router = () => {
           <Route exact path="detail" /*element={}*/ />
           <Route exact path="payment" /*element={}*/ />
         </Route>
-          <Route path="mypage" element={<Mypage />} /> 
+          <Route exact path="/mypage" element={<Mypage />} /> 
           <Route path="mypage/buylist" element={<Buylist />} />
           <Route exact path="mypage/cart" element={<CartLst />} />
           <Route exact path="mypage/queslist" element={<Qlist />} />

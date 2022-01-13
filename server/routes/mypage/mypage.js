@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const getConn = require("../db");
+const getConn = require("./db");
 
 /* SSR대신 RESTfull API로 대체 */
 
@@ -28,7 +28,7 @@ router.get('/',  (req, res) => {
 
  router.get("/buylist", (req, res)=>{
    let userid = "tea"//req.body.userid;
-   let squery = `SELECT * FROM buys where userid=${userid}`;
+   let squery = `SELECT * FROM buys where userid=${userid}`;//
 
    getConn((conn) => {
       conn.query(squery, (err, rows)=>{
