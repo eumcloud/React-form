@@ -61,6 +61,18 @@ function ProductDetail() {
         e.preventDefault();
         navigate(-1);
       } 
+      
+      const [number, setNumber] = useState(1);
+
+      const onIncrease = () => {
+        setNumber(number + 1);
+      }
+    
+      const onDecrease = () => {
+        setNumber(number - 1);
+      }
+
+      const Totalprice = number * inputData.realprice
 
       return (
         <>     
@@ -93,6 +105,15 @@ function ProductDetail() {
                   <TableCell><textarea cols="30" rows="8" value={inputData.content}/></TableCell>
                 </TableRow>
                 <TableRow>
+                  <TableCell>수량</TableCell>
+                  <TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button onClick={onDecrease} variant="text">-</Button>{number}<Button onClick={onIncrease} variant="text">+</Button></TableCell>
+                </TableRow>
+                <TableRow>
+                <TableCell>결제 예정금액</TableCell>
+                <TableCell>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  KRW {Totalprice}
+                  </TableCell>
                 </TableRow>
                 </TableBody>
             </Table> 
