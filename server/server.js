@@ -6,12 +6,11 @@ const cookieParser = require("cookie-parser");
 const fs = require("fs")
 const auth = require("./routes/auth");
 const mypages = require("./routes/mypage/mypage");
+const board = require("./routes/board")
 const port = 3001;
 const cors = require("cors");
 const authController = require('./controllers/auth');
-// require("./service/passport");
-// require('./routes/authRoutes')(app);
-// app.use(passport.initialize());
+
 app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/auth', auth);
 app.use("/mypage",/* authController.isLoggedIn, */ mypages); //개발 작업중이므로 필수인증 임시대기
+app.use('/board', board)
 
 const data = fs.readFileSync("./database.json");
 const conf = JSON.parse(data);
@@ -37,7 +37,6 @@ connection.connect((err) => {
 });
 
 app.get('/', authController.isLoggedIn, (req, res) => {
-
   res.send({
     user: req.user
   });
@@ -55,6 +54,9 @@ app.get('/', authController.isLoggedIn, (req, res) => {
   
 // })
 
+// app.get("/auth/logout", authcontroller.logout, (req, res) => {
+
+// });
 
 
 app.get("/api/products", (req, res) => {

@@ -19,7 +19,7 @@ export default function BoardPage() {
   const [inputData, setInputData] = useState([])
 
   const callApi = async() => {
-    const response = await axios.get("http://localhost:3001/api/boards")
+    const response = await axios.get("http://localhost:3001/board")
     setInputData([...inputData,...response.data])
   }
   
@@ -47,7 +47,8 @@ export default function BoardPage() {
   }; 
 
  const onClick = (e) => {
-  const idx = e.target.id
+  const idx = e.currentTarget.id
+  console.log(idx)
   axios.put("http://localhost:3001/board/hit",{bidx:idx})
     .then(response => {
       console.log(response);
@@ -66,7 +67,7 @@ export default function BoardPage() {
     <>
     <h1>글 목록</h1>
     <TableContainer >
-      <Table sx={{ maxWidth: 650 }} aria-label="simple table">
+      <Table size="small" sx={{ maxWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>User</TableCell>
@@ -79,13 +80,16 @@ export default function BoardPage() {
           {pagelist.map((row) => (
             
             <TableRow
+              id={row.bidx} 
+              onClick={onClick}
+              hover
               key={row.bidx}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {row.buserid}
               </TableCell>
-              <TableCell align="right" id={row.bidx} onClick={onClick} >{row.btitle}</TableCell>
+              <TableCell align="right"  ><h3 style={{cursor:"pointer"}} >{row.btitle}</h3></TableCell>
               <TableCell align="right">{row.bhit}</TableCell>
               <TableCell align="right">{row.regdate}</TableCell>
             </TableRow>
