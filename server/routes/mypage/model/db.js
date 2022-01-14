@@ -15,9 +15,9 @@ const getConn = function (callback){
    pool.getConnection((err, conn)=>{
    if(err) throw err;
    console.log("DB Conn!");
+   
    callback(conn)
-
-})
+   })
 }
 
 

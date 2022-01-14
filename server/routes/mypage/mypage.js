@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const getConn = require("./db");
+const getConn = require("./model/db");
 
 /* SSR대신 RESTfull API로 대체 */
 
 //정리를 위해 파일분할
 const carts = require("./carts");
+const buylist = require("./buylist");
+// const Buylist = require("./model/buylist.package/buylistDAO");
 // const directquestion = require("./directquestion");
 // const shipaddrs = require("./shipaddr");
 // const payinfo = require("./payinfo");
 
 router.use("/cart", carts);
+router.use("/buylist", buylist);
 // router.use("/dm", directquestion);
 // router.use("/addrs", shipaddrs);
 // router.use("/payifo", payinfo);
@@ -22,46 +25,22 @@ router.use("/cart", carts);
 
 // router.get('/', authController.isLoggedIn, (req, res) => {
 router.get('/',  (req, res) => {
-   const userid = "tea"//req.body.userid;
-   console.log("USER : "+userid+" PageIn");
- })
+   const userid = req.query.userid//req.body.userid;
+   // console.log("USER : "+userid+" PageIn");
+   res.cookie("jwtoken", `sha256`);
+   res.json(userid+" 님이 mypage 접속함")
+})
 
- router.get("/buylist", (req, res)=>{
-   let userid = "tea"//req.body.userid;
-   let squery = `SELECT * FROM buys where userid=${userid}`;//
+// router.post("/buylist", (req, res)=>{
+//    const userid = req.body.userid; //req.params.userid; // req.query.userid;
+//    console.log("chk USERID : "+ userid)
+//    console.log("쿠키 : ", req.cookies);
+//    let rows = " 준비중.."//Buylist.getBuylist(userid);
 
-   getConn((conn) => {
-      conn.query(squery, (err, rows)=>{
-         console.log(rows);
-         res.json(rows)
-      });
-      conn.release();
-    });
- })
- // router.get("/cart", (req, res)=>{
- //   let userid = "tea"//req.body.userid;
- //   let squery = `SELECT * from buys where userid=${userid}`;
-
- //   getConn((conn) => {
- //      conn.query(squery, (err, rows)=>{
- //         console.log(rows);
- //         res.json(rows)
- //      });
- //      conn.release();
- //    });
- // })
- router.get("/queslist", (req, res)=>{
-    let userid = "tea"//req.body.userid;
-   let squery = `select * from ${qlist} where userid = ${userid}`;
-
-   getConn((conn) => {
-      conn.query(squery, (err, rows)=>{
-         console.log(rows);
-         res.json(rows)
-      });
-      conn.release();
-    });
- })
+//    res.json(userid + rows + req.cookies.jwtoken);
+// })
+ 
+ 
  router.post("/chpass", (req, res)=>{
      let userid = "tea"//req.body.userid;
     const chpass = req.body.inputs;

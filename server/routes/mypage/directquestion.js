@@ -54,3 +54,18 @@ router.delete("/", (req, res)=>{
 });
 
 module.exports = router;
+
+
+// let userid = /*"tea"*/ req.body.userid;
+// router.get("/queslist", (req, res)=>{
+    // let userid = "tea"//req.body.userid;
+// //    let squery = `select * from ${qlist} where userid = ${userid}`;
+
+//    getConn((conn) => {
+    //   conn.query(squery, (err, rows)=>{
+        //  console.log(rows);
+        //  res.json(rows)
+    //   });
+    //   conn.release();
+    // });
+//  })

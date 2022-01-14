@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 // const icarts = require("../cart.package/interface/icarts");
-const cartD = require("./cart.package/dao/cartDao");
-const getConn = require("./db")
+const cartD = require("./model/cart.package/dao/cartDao");
+
  
 /* RESTfull: " 장바구니 " */
 
@@ -17,6 +17,7 @@ router.get("/", (req, res)=>{
 
 // Create Controller
 // post: root/mypage/cart/
+//smpl: http://localhost:3001/mypage/cart/?userid=ssa&productid=2
 router.post("/", (req, res)=>{
     let productid = req.body.id;
     let userid = req.session.userid;
