@@ -10,6 +10,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import './Paging.css'; 
 import Pagination from "react-js-pagination";
+import { Box } from '@mui/system';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export default function BoardPage() {
   let navigate = useNavigate(); 
@@ -48,7 +53,6 @@ export default function BoardPage() {
 
  const onClick = (e) => {
   const idx = e.currentTarget.id
-  console.log(idx)
   axios.put("http://localhost:3001/board/hit",{bidx:idx})
     .then(response => {
       console.log(response);
@@ -59,7 +63,13 @@ export default function BoardPage() {
     })
 
   navigate(`/board/detail/${idx}`)
- }
+  }
+
+ const [item, setItem] = React.useState('');
+
+  const handleChange = (event) => {
+    setItem(event.target.value);
+  };
 
   const pagelist = inputData.slice((pagenum-1)*10,pagenum*10)
 
@@ -84,12 +94,12 @@ export default function BoardPage() {
               onClick={onClick}
               hover
               key={row.bidx}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor:"pointer" }}
             >
               <TableCell component="th" scope="row">
                 {row.buserid}
               </TableCell>
-              <TableCell align="right"  ><h3 style={{cursor:"pointer"}} >{row.btitle}</h3></TableCell>
+              <TableCell align="right"  ><h3>{row.btitle}</h3></TableCell>
               <TableCell align="right">{row.bhit}</TableCell>
               <TableCell align="right">{row.regdate}</TableCell>
             </TableRow>

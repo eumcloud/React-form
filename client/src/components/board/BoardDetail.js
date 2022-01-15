@@ -8,9 +8,9 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { TextField } from "@mui/material";
 
 import CommentList from "./CommentList";
 
@@ -26,7 +26,6 @@ function BoardDetail() {
   if(cookie){
     loginId = JSON.parse(cookie).userid
   }
-  console.log(loginId)
 
   const [inputData, setInputData] = useState({
     bidx:'',
@@ -83,29 +82,29 @@ function BoardDetail() {
 
   return (
     <>
-      <h1>글 상세보기</h1>
-      <TableContainer sx={{ maxWidth: 650 }} component={Paper}>
-      <Table size="small"  aria-label="simple table">
+      <h1 align="center">글 상세보기</h1>
+      <TableContainer sx={{ maxWidth: 650 , margin: "auto" }} component={Paper}>
+      <Table aria-label="simple table">
         <TableBody>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">작성자</TableCell>
-              <TableCell><input name="buserid" value={inputData.buserid} style={style} readOnly/></TableCell>
+              <TableCell>{inputData.buserid}</TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">제목</TableCell>
-              <TableCell><input name="btitle" value={inputData.btitle} style={style} readOnly/></TableCell>
+              <TableCell>{inputData.btitle}</TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">내용</TableCell>
-              <TableCell><TextareaAutosize name="bcontent" value={inputData.bcontent} style={style} readOnly/></TableCell>
+              <TableCell><TextField multiline minRows={5} fullWidth value={inputData.bcontent} /></TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">조회수</TableCell>
-              <TableCell><input name="bhit" value={inputData.bhit} style={style} readOnly/></TableCell>
+              <TableCell>{inputData.bhit}</TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">좋아요수</TableCell>
-              <TableCell><input name="blikeuser" value={inputData.blikeuser} style={style} readOnly/></TableCell>
+              <TableCell>{inputData.blikeuser}</TableCell>
             </TableRow>
         </TableBody>
       </Table>
@@ -114,12 +113,12 @@ function BoardDetail() {
           inputData.buserid == loginId
           ? (
             <>
-            <Box sx={{ display: 'flex', justifyContent: 'start' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
             </Box>
             <form onSubmit={onSubmit}>
             <input name="bidx" type='hidden' />
-            <Box sx={{ display: 'flex', justifyContent: 'start' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button  variant="contained" type="submit">글 삭제하기</Button>
             </Box>
           </form>

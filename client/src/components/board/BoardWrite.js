@@ -2,7 +2,7 @@ import axios from "axios";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom"
 import { Box } from '@mui/system';
-import { TextareaAutosize } from "@mui/material";
+import { TextField } from "@mui/material";
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -62,20 +62,22 @@ function BoardWrite() {
     <>
       <h1>글 작성하기</h1>
       <form onSubmit={onSubmit}>
-        <TableContainer sx={{ maxWidth: 650 }} component={Paper}>
+        <TableContainer sx={{ maxWidth: 650, margin: "auto" }} component={Paper}>
       <Table aria-label="simple table">
         <TableBody>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">작성자</TableCell>
-              <TableCell><input name="buserid" value={inputData.buserid} style={style} readOnly/></TableCell>
+              <TableCell><TextField name="buserid" value={inputData.buserid} style={style} readOnly/></TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
               <TableCell align="center">제목</TableCell>
-              <TableCell><input name="btitle" value={inputData.btitle} style={style} onChange={onChange} required="required"/></TableCell>
+              <TableCell><TextField  name="btitle" value={inputData.btitle} style={style} onChange={onChange} required="required"/></TableCell>
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 , lineHeight:20 } }} >
               <TableCell align="center">내용</TableCell>
-              <TableCell><TextareaAutosize 
+              <TableCell><TextField 
+                  multiline
+                  rows={10}
                   value={inputData.bcontent}
                   style={style}
                   name='bcontent'
