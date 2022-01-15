@@ -4,6 +4,13 @@ import axios from "axios";
 import React, {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom"
 import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { TextField } from "@mui/material";
 
 
 function BoardUpdate() {
@@ -49,18 +56,20 @@ function BoardUpdate() {
       <h1>글 수정하기</h1>
       <form onSubmit={onSubmit}>
       <input type="hidden" name="buserid" value={inputData.buserid} />
-        <table border="1">
-          <tbody>
-            <tr>
-              <td>제목</td>
-              <td><input name="btitle" value={inputData.btitle} style={style} onChange={onChange} /></td>
-            </tr>
-            <tr>
-              <td>내용</td>
-              <td><TextareaAutosize name="bcontent" value={inputData.bcontent} style={style} onChange={onChange} /></td>
-            </tr>
-          </tbody>
-        </table>
+        <TableContainer sx={{ maxWidth: 650 , margin: "auto" }} component={Paper}>
+      <Table  size="small"  aria-label="simple table">
+        <TableBody>
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+              <TableCell align="center">제목</TableCell>
+              <TableCell><TextField name="btitle" value={inputData.btitle} onChange={onChange}/></TableCell>
+            </TableRow>
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+              <TableCell align="center">내용</TableCell>
+              <TableCell><TextField multiline rows={10} name="bcontent" value={inputData.bcontent} onChange={onChange}/></TableCell>
+            </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
         <Box sx={{ display: 'flex', justifyContent: 'start' }}>
           <Button type="submit" variant="contained">변경 내용 저장</Button>
         </Box>

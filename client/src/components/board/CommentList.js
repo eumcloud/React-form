@@ -9,8 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Box } from '@mui/system';
-import Button from '@mui/material/Button';
-import { TextareaAutosize } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import { TextField } from "@mui/material";
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -77,7 +79,7 @@ export default function CommentList({bnum}) {
   }
 
   const onDelete = e => {
-    e.preventDefault(); // submit 이벤트 발생시 refresh 방지
+    e.preventDefault(); 
     axios.delete("http://localhost:3001/board/comment",{
       params: {
         cidx: e.target.cidx.id
@@ -99,19 +101,21 @@ export default function CommentList({bnum}) {
     <br/>
     {
       loginId &&
-      <form onSubmit={onSubmit}>
-      <input type="hidden" name="cuserid" value={cinput.cuserid} />
-      <TextareaAutosize name="ccontent" value={cinput.ccontent} style={{resize : "none"}} onChange={onChange} />
-      <button type="submit">댓글 작성</button>
-    </form>
+      <div style = {{display: 'flex', justifyContent: 'center'}}>
+      <form  onSubmit={onSubmit}>
+      <input type="hidden" name="cuserid" value={cinput.cuserid} required="required"/>
+      <TextField label="Comment" name="ccontent" value={cinput.ccontent} sx={{ minWidth: 400 }} onChange={onChange} required="required"/>
+      <IconButton type="submit"><AddCommentIcon/></IconButton>
+      </form>
+      </div>
     }
-    <TableContainer >
-      <Table sx={{ maxWidth: 650 }} aria-label="simple table">
+    <TableContainer sx={{ maxWidth: 650 , margin: "auto" }}>
+      <Table size="small" sx={{ maxWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>userid</TableCell>
-            <TableCell >content</TableCell>
-            <TableCell ></TableCell>
+            <TableCell align="center">userid</TableCell>
+            <TableCell align="center">content</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -120,10 +124,10 @@ export default function CommentList({bnum}) {
               key={row.cidx}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align="center" component="th" scope="row">
               {row.cuserid}
               </TableCell>
-              <TableCell >{row.ccontent}</TableCell>
+              <TableCell align="center">{row.ccontent}</TableCell>
               <TableCell >
                 {
                   row.cuserid == loginId
@@ -132,7 +136,7 @@ export default function CommentList({bnum}) {
                       <form onSubmit={onDelete}>
                         <input name="cidx" id={row.cidx} type='hidden' />
                         <Box sx={{ display: 'flex', justifyContent: 'right' }}>
-                          <Button  variant="contained" type="submit">댓글 삭제</Button>
+                        <IconButton type="submit"><DeleteIcon fontSize="small"/></IconButton>
                         </Box>
                       </form>
                     </>
