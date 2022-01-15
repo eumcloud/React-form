@@ -19,7 +19,6 @@ function App() {
                     <Router />
                   </main> 
               </Container>
-      
             <Footer />
             {/* <BoardRoute /> */}
           </div>
