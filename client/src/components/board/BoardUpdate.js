@@ -52,28 +52,30 @@ function BoardUpdate() {
     <>
       <h1>글 수정하기</h1>
       <form onSubmit={onSubmit}>
-      <input type="hidden" name="buserid" value={inputData.buserid} />
+        <input type="hidden" name="buserid" value={inputData.buserid} />
         <TableContainer sx={{ maxWidth: 650 , margin: "auto" }} component={Paper}>
-      <Table  size="small"  aria-label="simple table">
-        <TableBody>
-            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
-              <TableCell align="center">제목</TableCell>
-              <TableCell><TextField name="btitle" value={inputData.btitle} onChange={onChange}/></TableCell>
-            </TableRow>
-            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
-              <TableCell align="center">내용</TableCell>
-              <TableCell><TextField multiline rows={10} name="bcontent" value={inputData.bcontent} onChange={onChange}/></TableCell>
-            </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-        <Box sx={{ display: 'flex', justifyContent: 'start' }}>
+          <Table  size="small"  aria-label="simple table">
+            <TableBody>
+              <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+                <TableCell align="center">제목</TableCell>
+                <TableCell><TextField fullWidth name="btitle" value={inputData.btitle} onChange={onChange}/></TableCell>
+              </TableRow>
+              <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+                <TableCell align="center">내용</TableCell>
+                <TableCell><TextField fullWidth multiline rows={10} name="bcontent" value={inputData.bcontent} onChange={onChange}/></TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br/>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button type="submit" variant="contained">변경 내용 저장</Button>
         </Box>
       </form>
-        <Box sx={{ display: 'flex', justifyContent: 'start' }}>
-          <Button onClick={()=>navigate(-1)} variant="contained">수정 취소</Button>
-        </Box>
+      <br/>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button onClick={()=>navigate(-1)} variant="contained">수정 취소</Button>
+      </Box>
     </>
   )
 }
