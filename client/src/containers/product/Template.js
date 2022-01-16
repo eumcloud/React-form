@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TemplateBlock = styled.div`
   width: 512px;
-  height: 750px;
+  height: 900px;
 
   background-color: grey;
   position: relative;

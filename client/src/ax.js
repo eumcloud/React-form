@@ -1,5 +1,5 @@
 const axios = require("axios");
-function getAxios(path){
+function api(path){
     axios.get("https://localhost:3001"+ path)
     .then(resp =>{
        console.log(resp);
@@ -10,4 +10,4 @@ function getAxios(path){
     })
  }
  
- module.exports = getAxios;
+ module.exports = api;
