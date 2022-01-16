@@ -10,7 +10,7 @@ import Template from "./Template"
 import {useNavigate} from "react-router-dom"
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Payment from "./Payment";
+
 
 
 const Fontbutton = styled.div`

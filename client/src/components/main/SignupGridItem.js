@@ -51,6 +51,7 @@ export default function SignupGridItem() {
             alert(error.response.data.error)
         })
 
+        window.location.replace('/');
         // setTimeout(() => {
         //     props.resetForm()
         //     props.setSubmitting(false)

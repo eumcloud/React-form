@@ -113,9 +113,11 @@ function BoardDetail() {
           inputData.buserid == loginId
           ? (
             <>
+            <br/>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button  variant="contained" onClick={onClick} >글 수정하기</Button>
             </Box>
+            <br/>
             <form onSubmit={onSubmit}>
             <input name="bidx" type='hidden' />
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>

@@ -1,4 +1,3 @@
-import { TextareaAutosize } from "@mui/material";
 import { Box } from '@mui/system';
 import axios from "axios";
 import React, {useState} from "react";
@@ -37,7 +36,6 @@ function BoardUpdate() {
   }
   const onSubmit = (e) => {
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-    console.log("a")
     axios.put("http://localhost:3001/board",inputData)
     .then(response => {
       console.log(response);
@@ -49,7 +47,6 @@ function BoardUpdate() {
     navigate(-1);
   }
 
-  const style= {border: "none", background: "transparent" , resize : "none"}
 
   return (
     <>

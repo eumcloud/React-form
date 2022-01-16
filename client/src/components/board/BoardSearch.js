@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {useNavigate, useParams} from "react-router-dom"
+import {useNavigate, useLocation} from "react-router-dom"
 import axios from "axios";
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -8,49 +8,43 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import './Paging.css'; 
-import Pagination from "react-js-pagination";
 import { TextField } from "@mui/material";
 import Button from '@mui/material/Button';
 import NativeSelect from '@mui/material/NativeSelect';
 
 
-export default function BoardPage() {
+
+
+export default function BoardSearch() {
   let navigate = useNavigate(); 
+  const location = useLocation();
+  const locstate = location.state
+  const rescat = locstate.searchcat
+  const resvalue = locstate.searchvalue
+
   
-  let params = useParams();
-  const pagenum = parseInt(params.page)
-  const [inputData, setInputData] = useState([])
+  const [inputData, setInputData] = useState([{
+    bidx: 0,
+    bcontent: "",
+    bhit: "",
+    blikeuser: "",
+    btitle: "",
+    buserid: "",
+    modidate: "",
+    regdate: ""
+  }])
 
   const callApi = async() => {
     const response = await axios.get("http://localhost:3001/board")
-    setInputData([...inputData,...response.data])
+      setInputData(response.data)
   }
-  
+
   useEffect(() => {
     callApi();
   },[]);
 
-  const Paging = () => {
-    const [page, setPage] = useState(parseInt(params.page));
-    const handlePageChange = (page) => { 
-      setPage(page); 
-      navigate(`/board/page/${page}`);
-    };
-    return (
-      <Pagination 
-      activePage={page}
-      itemsCountPerPage={10}
-      totalItemsCount={inputData.length}
-      pageRangeDisplayed={5}
-      prevPageText={"‹"}
-      nextPageText={"›"}
-      onChange={handlePageChange} 
-      />
-    ); 
-  }; 
 
- const onClick = (e) => {
+  const onClick = (e) => {
   const idx = e.currentTarget.id
   axios.put("http://localhost:3001/board/hit",{bidx:idx})
     .then(response => {
@@ -77,24 +71,32 @@ export default function BoardPage() {
     })
   }
 
-  const pagelist = inputData.slice((pagenum-1)*10,pagenum*10)
+  let searchlist;
+  if(rescat == "buserid") {
+    searchlist = inputData.filter(obj => obj.buserid.includes(resvalue))
+  }
+  else {
+    searchlist = inputData.filter(obj => obj.btitle.includes(resvalue))
+  }
 
+
+  console.log(searchlist)
   return (
     <>
-    <h1 align="center">글 목록</h1>
+    <h1>검색 결과</h1>
     <TableContainer >
       <Table size="small" sx={{ maxWidth: 650, margin: "auto" }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>작성자</TableCell>
+          <TableCell>작성자</TableCell>
             <TableCell align="right">제목</TableCell>
             <TableCell align="right">조회수</TableCell>
             <TableCell align="right">작성일</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {pagelist.map((row) => (
-            
+          { searchlist.length != 0 
+          ? searchlist.map((row) => (
             <TableRow
               id={row.bidx} 
               onClick={onClick}
@@ -109,14 +111,19 @@ export default function BoardPage() {
               <TableCell align="right">{row.bhit}</TableCell>
               <TableCell align="right">{row.regdate}</TableCell>
             </TableRow>
-          ))}
+          ))
+          :
+          <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 }}}>
+            <TableCell align="right"><h2>검색기록이 없습니다</h2> </TableCell>
+        </TableRow>
+        }
         </TableBody>
       </Table>
     </TableContainer>
-    <Paging />
     <div style = {{display: 'flex', justifyContent: 'center'}}>
     <form onSubmit={onSearch}>
       <NativeSelect
+        size="large"
         inputProps={{
           name: 'category'
         }}
