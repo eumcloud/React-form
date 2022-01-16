@@ -13,12 +13,12 @@ return new Promise((resolve, reject)=>{
 })
 }
 
-exports.addDM = async (dm, userid)=>{
+exports.addDM = (dm, userid)=>{
     return new Promise((resolve, reject)=>{
    let sQuery = `INSERT INTO MdirectBoard
    (userid,    type,    title,    desc) VALUES ('${dm.userid}','${dm.type}', '${dm.title}', '${dm.desc}') `;
    getConn((conn)=>{
-       await conn.query(sQuery, (err, result)=>{
+        conn.query(sQuery, (err, result)=>{
           console.log(result);
           resolve( result);
        });

@@ -8,6 +8,7 @@ import Signup from "./containers/main/Signup";
 import NoPage from "./components/Nopage";
 import Product from "./containers/product/Product"
 import ProductDetail from "./containers/product/ProductDetail"
+import BuyProduct from "./containers/product/BuyProduct"
 import Mypage from  "./containers/mypage/MypageContainer"
 import BoardLayout from "./components/board/BoardLayout";
 import BoardPage from "./components/board/BoardPage";
@@ -16,7 +17,7 @@ import BoardWrite from "./components/board/BoardWrite";
 import BoardUpdate from "./components/board/BoardUpdate";
 import BoardSearch from "./components/board/BoardSearch";
 import Buylist from "./containers/mypage/Buylist";
-import CartLst from "./components/mypage/cart/CartLst";
+import CartLst from "./components/mypage/cart/CartLst";<Route exact path="product/buyproduct/:id" element={<BuyProduct/>} />
 import ChPassword from "./components/mypage/passchange/ChPassword";
 import Payinfo from "./components/mypage/payinfo/Payinfo";
 import QForm from "./components/mypage/ques/QForm";
@@ -43,6 +44,7 @@ const Router = () => {
           <Route path="update/:update" element={<BoardUpdate />} />
           <Route path="detail" element={<BoardDetail />} />
           <Route path="detail/:detail" element={<BoardDetail />} />
+         
         </Route>
 
         <Route path="/product" element={<Product />} />

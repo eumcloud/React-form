@@ -10,11 +10,11 @@ const configs = require("./database.json")
 // }
 const pool = db.createPool(configs)
 
-const getConn = async function (callback){
+const getConn =  function (callback){
    pool.getConnection((err, conn)=>{
    if(err) throw err;
    console.log("DB Conn!");
-   await callback(conn)
+    callback(conn)
 
 })
 }

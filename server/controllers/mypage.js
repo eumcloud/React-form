@@ -1,10 +1,10 @@
-const buylistDAO = require("../routes/temp/model/buylistDAO");
-const cartDAO = require("../routes/temp/cart.package/dao/cartDao");
-const dmDAO = require("../routes/temp/model/dmDAO");
-const passDAO = require("../routes/temp/model/passDAO");
-const addressDAO = require("../routes/temp/model/addressDAO");
-const payinfoDAO = require("../routes/temp/model/payinfoDAO");
-const secessionDAO = require("../routes/temp/model/secessionDAO");
+const buylistDAO = require("../model/buylistDAO");
+const cartDAO = require("../model/cartDao");
+const dmDAO = require("../model/dmDAO");
+const passDAO = require("../model/passDAO");
+const addressDAO = require("../model/addressDAO");
+const payinfoDAO = require("../model/payinfoDAO");
+const secessionDAO = require("../model/secessionDAO");
 
 
 module.exports  = {

@@ -1,4 +1,4 @@
-const getConn = require("../routes/mypage/cart.package/dao/db");
+const getConn = require("./db");
 
 exports.getCartlist = (userid) => {
     return new Promise((resolve, reject) => {
