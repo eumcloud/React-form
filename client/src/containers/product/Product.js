@@ -37,10 +37,6 @@ const useStyles = makeStyles({
     callApi();
     },[]);
 
-    
-
-
-  
     return (
     <Paper className= {classes.root}>
       <Table className= {classes.table}>

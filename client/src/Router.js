@@ -8,7 +8,6 @@ import Signup from "./containers/main/Signup";
 import NoPage from "./components/Nopage";
 import Product from "./containers/product/Product"
 import ProductDetail from "./containers/product/ProductDetail"
-import BuyProduct from "./containers/product/BuyProduct"
 import Mypage from  "./containers/mypage/MypageContainer"
 import BoardLayout from "./components/board/BoardLayout";
 import BoardPage from "./components/board/BoardPage";
@@ -49,8 +48,7 @@ const Router = () => {
         <Route path="/product" element={<Product />} />
           <Route exact path="list" element={<Product />} />
           <Route exact path="product/productdetail/:id" element={<ProductDetail />} />
-          <Route exact path="product/buyproduct/:id" element={<BuyProduct/>} />
-      
+
           <Route path="/mypage" element={<Mypage />} /> 
           <Route path="/mypage/buylist" element={<Buylist />} />
           <Route exact path="/mypage/cart" element={<CartLst />} />
