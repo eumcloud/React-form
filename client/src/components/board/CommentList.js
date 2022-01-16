@@ -100,7 +100,7 @@ export default function CommentList({bnum}) {
     <br/>
     <br/>
     {
-      loginId &&
+      loginId ?
       <div style = {{display: 'flex', justifyContent: 'center'}}>
       <form  onSubmit={onSubmit}>
       <input type="hidden" name="cuserid" value={cinput.cuserid} required="required"/>
@@ -108,8 +108,12 @@ export default function CommentList({bnum}) {
       <IconButton type="submit"><AddCommentIcon/></IconButton>
       </form>
       </div>
+      :
+      <h3 align="center">댓글작성을 위해서 로그인해주세요</h3>
     }
-    <TableContainer sx={{ maxWidth: 650 , margin: "auto" }}>
+    { commentData.length !==0
+    ?
+      <TableContainer sx={{ maxWidth: 650 , margin: "auto" }}>
       <Table size="small" sx={{ maxWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -150,6 +154,9 @@ export default function CommentList({bnum}) {
         </TableBody>
       </Table>
     </TableContainer>
+    : 
+    <h2 align="center">첫번째 댓글을 입력해주세요</h2>
+    }
     </>
   );
 }

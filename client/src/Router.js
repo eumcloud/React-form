@@ -15,6 +15,7 @@ import BoardPage from "./components/board/BoardPage";
 import BoardDetail from "./components/board/BoardDetail";
 import BoardWrite from "./components/board/BoardWrite";
 import BoardUpdate from "./components/board/BoardUpdate";
+import BoardSearch from "./components/board/BoardSearch";
 import Buylist from "./components/mypage/buylist/Buylist";
 import CartLst from "./components/mypage/cart/CartLst";
 import ChPassword from "./components/mypage/passchange/ChPassword";
@@ -36,12 +37,13 @@ const Router = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route path="*" element={<NoPage />} />
 
-        <Route exact path="/board" element={<BoardLayout />}>
+        <Route path="/board" element={<BoardLayout />}>
           <Route path="page/:page" element={<BoardPage />} />
-          <Route exact path="write" element={<BoardWrite />} />
-          <Route exact path="update/:update" element={<BoardUpdate />} />
-          <Route exact path="detail" element={<BoardDetail />} />
-          <Route exact path="detail/:detail" element={<BoardDetail />} />
+          <Route path="search" element={<BoardSearch />} />
+          <Route path="write" element={<BoardWrite />} />
+          <Route path="update/:update" element={<BoardUpdate />} />
+          <Route path="detail" element={<BoardDetail />} />
+          <Route path="detail/:detail" element={<BoardDetail />} />
         </Route>
 
         <Route path="/product" element={<Product />} />

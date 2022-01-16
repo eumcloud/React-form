@@ -16,12 +16,12 @@ const BoardLayout = () => {
       <br/>
       <nav>
         <ul className='tabs'>
-          <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+          <Box sx={{ float:"right", margin:1 }}>
             <Button component={Link} to="/board/page/1" variant="contained">글 목록</Button>
           </Box>
           {
             loginId &&
-            <Box sx={{ display: 'flex', justifyContent: 'right' }}>
+            <Box sx={{ float:"right", margin:1 }}>
               <Button component={Link} to="/board/write" variant="contained">글 쓰기</Button>
             </Box>
           }
