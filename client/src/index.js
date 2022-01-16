@@ -6,14 +6,14 @@ import { Provider } from "react-redux";
 import rootReducer from "./context/"
 import { composeWithDevTools} from "redux-devtools-extension";
 
-// const store = createStore(rootReducer, composeWithDevTools()); //make store 
-// console.log(store.getState()); //store state pring to console
+const store = createStore(rootReducer, composeWithDevTools()); //make store 
+console.log(store.getState()); //store state pring to console
 ReactDOM.render(
-
-  <React.StrictMode>
+<Provider store ={store} >
+  {/* // <React.StrictMode> */}
     <App />
-  </React.StrictMode>
-  
+  {/* //</React.StrictMode> */}
+  </Provider>
   ,document.getElementById('root')
 );
 

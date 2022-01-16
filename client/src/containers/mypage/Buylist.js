@@ -14,21 +14,25 @@ export default function BuylistContainer(){
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(()=>{
-        const fetchLists = async ()=>{
-            try{
-                setError(null);
-                setLoading(true);
+    useEffect(async()=>{
+        const response = await api.get("/mypage/buylist");
+        setLists(...lists, ...response.data);
+    },[])
+    // useEffect(()=>{
+    //     const fetchLists = async ()=>{
+    //         try{
+    //             setError(null);
+    //             setLoading(true);
 
-                const result = await Api.get("/mypage/buylist");
-                setLists(result.data);
-            } catch (e){
-                setError(e);
-            }
-            setLoading(false);
-        }
-        fetchLists();
-    },[]);
+    //             const result = await Api.get("/mypage/buylist");
+    //             setLists(result.data);
+    //         } catch (e){
+    //             setError(e);
+    //         }
+    //         setLoading(false);
+    //     }
+    //     fetchLists();
+    // },[]);
 
     if (loading) return <div>로딩중..</div>;
     if (error) return <div>새로고침을 눌러주세요</div>;
@@ -38,7 +42,7 @@ export default function BuylistContainer(){
 
     // const dispatch = useDispatch();
 
-    return <>
+    return (<>
         <NavigationBar />
         <Template>
             <Header />
@@ -51,6 +55,6 @@ export default function BuylistContainer(){
                 </ul>
                
         </Template>
-    </>
+    </>);
 
 }

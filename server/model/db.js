@@ -13,7 +13,7 @@ const pool = db.createPool(configs)
 const getConn =  function (callback){
    pool.getConnection((err, conn)=>{
    if(err) throw err;
-   console.log("DB Pool!");
+   console.log("Pool active!");
     callback(conn)
 
 })
