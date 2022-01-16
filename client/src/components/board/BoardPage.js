@@ -128,16 +128,6 @@ export default function BoardPage() {
       <Button size="large" type="submit" variant="contained">검색</Button>
     </form>
     </div>
-      <form>
-        <NativeSelect
-          inputProps={{
-            name: 'category'
-          }}
-        >
-          <option value="buserid"> 작성자</option>
-          <option value="btitle"> 제목</option>
-        </NativeSelect>
-      </form>
     </>
   );
 }

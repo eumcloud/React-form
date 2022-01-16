@@ -96,7 +96,6 @@ exports.signup = (req, res) => {
                 if(err) throw err;
                 
                 console.log(results);
-                return res.redirect('/signup')
             });
         });
 
