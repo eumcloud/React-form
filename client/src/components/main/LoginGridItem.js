@@ -43,7 +43,13 @@ const Login=({ handleChange })=>{
                    type: "LOGIN",
                    payload: user
                 })
-                window.localStorage.setItem('user',  userState);
+                if(userState){
+                  window.localStorage.setItem('user',  userState);
+                  window.location.replace('/');
+                }
+                else{
+                  window.alert("올바른 email과 비밀번호를 입력해주세요")
+                }
                 // window.location.replace('/');
             })
             .catch(error => {   //FIXME: error

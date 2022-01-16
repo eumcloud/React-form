@@ -26,15 +26,8 @@ const Logout=()=>{
     }
     
     const onSubmit = async (values, props) => {
-        
-               dispatch({ 
-                   type: "LOGOUT"
-                })
                 window.localStorage.removeItem('user')
-                const {data} = await axios.get('/auth/logout');
-                console.log(data.message);
                 window.location.replace('/');
-        
     }
     return (
         <Grid>
