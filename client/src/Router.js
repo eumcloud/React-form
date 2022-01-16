@@ -8,7 +8,6 @@ import Signup from "./containers/main/Signup";
 import NoPage from "./components/Nopage";
 import Product from "./containers/product/Product"
 import ProductDetail from "./containers/product/ProductDetail"
-import BuyProduct from "./containers/product/BuyProduct"
 import Mypage from  "./containers/mypage/MypageContainer"
 import BoardLayout from "./components/board/BoardLayout";
 import BoardPage from "./components/board/BoardPage";
