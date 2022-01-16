@@ -15,7 +15,7 @@ import BoardDetail from "./components/board/BoardDetail";
 import BoardWrite from "./components/board/BoardWrite";
 import BoardUpdate from "./components/board/BoardUpdate";
 import BoardSearch from "./components/board/BoardSearch";
-import Buylist from "./components/mypage/buylist/Buylist";
+import Buylist from "./containers/mypage/Buylist";
 import CartLst from "./components/mypage/cart/CartLst";
 import ChPassword from "./components/mypage/passchange/ChPassword";
 import Payinfo from "./components/mypage/payinfo/Payinfo";
@@ -50,11 +50,11 @@ const Router = () => {
           <Route exact path="product/productdetail/:id" element={<ProductDetail />} />
 
           <Route path="/mypage" element={<Mypage />} /> 
-          <Route path="/mypage/buylist" element={<Buylist />} />
-          <Route exact path="/mypage/cart" element={<CartLst />} />
-          <Route exact path="/mypage/queslist" element={<Qlist />} />
-		      <Route path="/mypage/quesform" element={<QForm />} />
-          <Route exact path="/mypage/delete" /*element={}*/ />
+          <Route path="mypage/buylist" element={<Buylist />} />
+          <Route path="mypage/cart" element={<CartLst />} />
+          <Route path="mypage/queslist" element={<Qlist />} />
+		      <Route path="mypage/quesform" element={<QForm />} />
+          <Route path="/mypage/delete" /*element={}*/ />
           <Route path="/mypage/passchange" element={<ChPassword />} />
           <Route path="/mypage/shipaddr"  element={<ShpAddr />} />
           <Route path="/mypage/payinfo" element={<Payinfo />} />

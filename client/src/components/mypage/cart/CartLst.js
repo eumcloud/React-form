@@ -74,40 +74,7 @@ export default function Lists() {
 
   const pHeader = ["상품명", "이미지", "가격", "날짜"];
   const dt = new Date(); //will be change
-  // const products = [
-  //   {
-  //     id: 1,
-  //     title: "1234",
-  //     url: "/list1",
-  //     img: "https://placeimg.com/64/64/1",
-  //     price: 3300,
-  //     date: dt.toLocaleDateString()
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "1234",
-  //     url: "/list2",
-  //     img: "https://placeimg.com/64/64/1",
-  //     price: 5500,
-  //     date: dt.toLocaleDateString()
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "1234",
-  //     url: "/list3",
-  //     img: "https://placeimg.com/64/64/1",
-  //     price: 1200,
-  //     date: dt.toLocaleDateString()
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "1234",
-  //     url: "/list4",
-  //     img: "https://placeimg.com/64/64/1",
-  //     price: 3300,
-  //     date: dt.toLocaleDateString()
-  //   }
-  // ];
+  
   const title = "장바구니";
 
   // 체크박스 넘버 가져올때 ref
@@ -123,15 +90,15 @@ export default function Lists() {
           ))}
         </THBlock>
         <ListStyled>
-          {lists.map((tt) => (
+          {lists.map((cc) => (
             <div className="plist">
-              <a href={tt.url}>
+              <a href={cc.url}>
                 <ListContents>
-                  <CheckBox value={tt.cno} />
-                  <span>{tt.title}</span>
-                  <img src={tt.img} />
-                  <span> {tt.price}</span>
-                  <span> {tt.date}</span>
+                  <CheckBox value={cc.cno} />
+                  <span>{cc.product}</span>
+                  <img src={cc.image} />
+                  <span> {cc.price}</span>
+                  <span> {dt}</span>
                 </ListContents>
               </a>
             </div>
